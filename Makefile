@@ -6,7 +6,7 @@
 #    By: sgalasso <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/13 17:12:19 by sgalasso          #+#    #+#              #
-#    Updated: 2018/07/28 21:47:21 by sgalasso         ###   ########.fr        #
+#    Updated: 2018/07/29 01:10:41 by sgalasso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,10 @@ SRC = 	srcs/main.c \
 		srcs/labels.c \
 		srcs/file.c \
 		srcs/parameters.c \
+		srcs/parser_lst.c \
+		srcs/parser_handle_label.c \
+		srcs/parser_handle_inst.c \
+		srcs/parser_handle_param.c \
 
 OBJ = $(SRC:.c=.o)
 
