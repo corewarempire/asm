@@ -30,13 +30,13 @@ INCLUDES = includes/
 all: lib $(NAME)
 
 $(NAME):	$(OBJ)
-	gcc -Wall -Wextra -Werror -o $(NAME) libft/libft.a $(OBJ) -I $(INCLUDES)
+	gcc -Wall -Wextra -Werror -o $(NAME) libft/libft.a $(OBJ) -I $(INCLUDES) -g #enlever le -g
 
 lib:
 	make -C libft/
 
 %.o: %.c $(INCLUDES)asm.h
-	gcc -Wall -Wextra -Werror -o $@ -c $< -I $(INCLUDES)
+	gcc -Wall -Wextra -Werror -o $@ -c $< -I $(INCLUDES)  -g #enlever le -g
 
 clean:
 	rm -f $(OBJ) && make -C libft/ clean

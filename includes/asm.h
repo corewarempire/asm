@@ -61,7 +61,7 @@ struct	s_data
 	t_line			*lines;
 	t_label			*labels;
 	t_op			*op_tab;
-	int				nb_label;
+	int				prog_size;
 	char			*name;
 	char			*comment;
 };

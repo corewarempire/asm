@@ -79,7 +79,10 @@ void	file_write_header(t_data *data, int fd)
 		ft_putchar_fd(0, fd);
 		padding--;
 	}
-	ft_putchar_fd(':', fd);
+	ft_putchar_fd((char)(data->prog_size >> 24), fd);
+	ft_putchar_fd((char)(data->prog_size >> 16), fd);
+	ft_putchar_fd((char)(data->prog_size >> 8), fd);
+	ft_putchar_fd((char)data->prog_size, fd);
 	ft_putstr_fd(data->comment, fd);
 	padding = COMMENT_LENGTH - ft_strlen(data->comment) - 1;
 	padding = padding > 0 ? padding + padding % 4: 0;

@@ -17,7 +17,6 @@ void	labels_free(t_label *labels)
 	if (!labels)
 		return ;
 	labels_free(labels->next);
-	free(labels->name);
 	free(labels);
 }
 

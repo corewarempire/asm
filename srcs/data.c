@@ -45,7 +45,7 @@ void	data_initialize(t_data *data)
 	data->comment = 0;
 	data->lines = 0;
 	data->labels = 0;
-	data->nb_label = 0;
+	data->prog_size = 0;
 	data->op_tab = g_op_tab;
 }
 

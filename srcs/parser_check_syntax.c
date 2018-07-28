@@ -73,7 +73,7 @@ char	*parser_cut_line(char *line)
 	return (line);
 }
 
-char	*parser_handle_label(char *line, t_line *new, t_data *data)
+char	*parser_handle_label(char *line, t_line *new)
 {
 	int	i;
 	int temp;
@@ -92,7 +92,6 @@ char	*parser_handle_label(char *line, t_line *new, t_data *data)
 	if (line[i] == ':')
 	{
 		new->label = ft_strsub(line, temp, i - temp); // LEAK ?
-		data->nb_label++;
 		line += i + 1;
 		return (line);
 	}
@@ -242,7 +241,7 @@ char	*parser_check_syntax(char *line, t_data *data)
 
 
 	// Traitement du contenu
-	if (!(line = parser_handle_label(line, new, data)))
+	if (!(line = parser_handle_label(line, new)))
 		return (0);
 	if (!parser_is_empty(line))
 	{
