@@ -6,7 +6,7 @@
 /*   By: sgalasso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/19 19:40:53 by sgalasso          #+#    #+#             */
-/*   Updated: 2018/07/26 19:03:50 by sgalasso         ###   ########.fr       */
+/*   Updated: 2018/07/28 20:38:02 by sgalasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	data_free(t_data *data);
 int		reader_read(int fd, t_data *data);
 int		reader_check_header(t_data *data, char *line);
 
-int		parser_check_syntax(char *line, t_data *data);
+char	*parser_check_syntax(char *line, t_data *data);
 
 void 	lines_free(t_line *lines);
 int		lines_evaluate_size(t_line *line, t_op op);
