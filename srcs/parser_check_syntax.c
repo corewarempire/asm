@@ -6,7 +6,7 @@
 /*   By: sgalasso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/21 19:24:04 by sgalasso          #+#    #+#             */
-/*   Updated: 2018/07/28 18:32:41 by sgalasso         ###   ########.fr       */
+/*   Updated: 2018/07/28 20:57:00 by sgalasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ char	*parser_cut_line(char *line)
 		i++;
 	if (line[i] == '#')
 	{
-		if (!(cut = ft_strsub(line, 0, i)))
+		if (!(cut = ft_strsub(line, 0, i))) // LEAK ?
 			return (0);
 		return (cut);
 	}
@@ -91,7 +91,7 @@ char	*parser_handle_label(char *line, t_line *new, t_data *data)
 	}
 	if (line[i] == ':')
 	{
-		new->label = ft_strsub(line, temp, i - temp);
+		new->label = ft_strsub(line, temp, i - temp); // LEAK ?
 		data->nb_label++;
 		line += i + 1;
 		return (line);
@@ -114,10 +114,12 @@ int		parser_is_inst(char *line, int temp, int i, t_op *op_tab, t_line *new)
 		{
 			new->command = op_tab[j].op_code;
 			new->nb_params = op_tab[j].nb_params;
+			free(inst);
 			return (1);
 		}
 		j++;
 	}
+	free(inst);
 	return (0);
 }
 
@@ -156,7 +158,7 @@ char	*parser_handle_param(char *line, t_line *new, int nbp)
 	temp = i;
 	while (line[i] && line[i] != ' ' && line[i] != '\t' && line[i] != ',')
 		i++;
-	if (!(param = ft_strsub(line, temp, i - temp)))
+	if (!(param = ft_strsub(line, temp, i - temp))) // LEAK ?
 		return (0);
 	if ((param[0] == '%' && parser_is_digits(param + 1))
 	|| (param[0] == '%' && param[1] == ':' && parser_is_label(param + 2))
@@ -223,16 +225,18 @@ int		parser_is_empty(char *line)
 	return (1);
 }
 
-int		parser_check_syntax(char *line, t_data *data)
+char	*parser_check_syntax(char *line, t_data *data)
 {
+	char	*temp;
 	t_line	*new;
 	int		nbp;
 
 	nbp = 0;
+	temp = line;
 	if (!(line = parser_cut_line(line)))
 		return (0);
 	if (parser_is_empty(line))
-		return (1);
+		return (temp);
 	if (!(new = parser_lstnew()))
 		return (0);
 
@@ -271,5 +275,5 @@ int		parser_check_syntax(char *line, t_data *data)
 	//_________________________
 
 
-	return (1);
+	return (temp);
 }
