@@ -6,7 +6,7 @@
 /*   By: sgalasso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/21 19:24:04 by sgalasso          #+#    #+#             */
-/*   Updated: 2018/07/29 01:12:53 by sgalasso         ###   ########.fr       */
+/*   Updated: 2018/07/29 01:46:31 by sgalasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int		parser_is_digits(char *str)
 	int i;
 
 	i = 0;
+	if (str[i] == '-')
+		i++;
 	while (str[i])
 	{
 		if (!ft_isdigit(str[i]))
