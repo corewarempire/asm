@@ -1,41 +1,102 @@
 .name "boss"
 .comment "be humble"
 
-wall:
-		ld		%0,		r2
-		st		r2,		-64
-		st		r2,		-73
-		st		r2,		-82
-		st		r2,		-91
-		st		r2,		-100
-		st		r2,		-109
-		st		r2,		-118
-		st		r2,		-127
-		st		r2,		-136
-		st		r2,		-145
-		st		r2,		-154
-		st		r2,		-163
-		st		r2,		-170
-		zjmp	%:wall
+		fork	%:wall1
+		st		r1,		6
+		live	%0
+		fork	%:wall2
+		st		r1,		6
+		live	%0
+		fork	%:strike
 
-#start:
-#		sti		r1,		%:pos1,		%1
-#		sti		r1,		%:pos2,		%1
-#		sti		r1,		%:pos3,		%1
-#		sti		r1,		%:pos4,		%1
-#		sti		r1,		%:pos5,		%1
+wall1:
+		st		r1,		6
+		live	%0
+		st		r16,	-100
+		st		r16,	-110
+		st		r16,	-120
+		st		r16,	-130
+		st		r16,	-140
+		st		r16,	-150
+		st		r16,	-160
+		st		r16,	-170
+		st		r16,	-180
+		st		r16,	-190
+		st		r16,	-200
+		st		r16,	-210
+		st		r16,	-220
+		st		r16,	-230
+		st		r16,	-240
+		st		r16,	-250
+		st		r16,	-260
+		st		r16,	-270
+		st		r16,	-280
+		st		r16,	-290
+		st		r16,	-300
+		st		r16,	-310
+		st		r16,	-320
+		st		r16,	-330
+		st		r16,	-340
+		st		r16,	-350
+		st		r16,	-360
+		st		r16,	-370
+		st		r16,	-380
+		st		r16,	-390
+		st		r16,	-400
+		st		r16,	-410
+		st		r16,	-420
+		st		r16,	-430
+		ld		%0,		r16
+		zjmp	%:wall1
 
-#pos1:
-#		live	%0
+wall2:
+		st		r1,		6
+		live	%0
+		st		r16,	250
+		st		r16,	250
+		st		r16,	250
+		st		r16,	250
+		st		r16,	250
+		st		r16,	250
+		st		r16,	250
+		st		r16,	250
+		st		r16,	250
+		st		r16,	250
+		st		r16,	250
+		st		r16,	250
+		st		r16,	250
+		st		r16,	250
+		st		r16,	250
+		st		r16,	250
+		st		r16,	250
+		st		r16,	250
+		st		r16,	250
+		st		r16,	250
+		st		r16,	250
+		st		r16,	250
+		st		r16,	250
+		st		r16,	250
+		st		r16,	250
+		st		r16,	250
+		st		r16,	250
+		st		r16,	250
+		st		r16,	250
+		st		r16,	250
+		st		r16,	250
+		st		r16,	250
+		st		r16,	250
+		st		r16,	250
+		st		r16,	250
+		st		r16,	250
+		ld		%0,		r16
+		zjmp	%:wall2
 
-#pos2:
-#		live	%0
+strike:
+		st		r1,		6
+		live	%0
+		fork	%180
+		ld		%0,		r16
+		zjmp	%:strike
 
-#pos3:
-#		live	%0
+	
 
-#pos4:
-#		live	%0
-
-#pos5:
-#		live	%0
