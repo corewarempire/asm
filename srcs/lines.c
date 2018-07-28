@@ -25,7 +25,6 @@ void	lines_free(t_line *lines)
 	free(lines->params);
 	free(lines->params_type);
 	free(lines->label);
-	free(lines);
 }
 
 int		lines_evaluate_size(t_line *line, t_op op)

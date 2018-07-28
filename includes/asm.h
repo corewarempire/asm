@@ -75,7 +75,7 @@ void	data_free(t_data *data);
 int		reader_read(int fd, t_data *data);
 int		reader_check_header(t_data *data, char *line);
 
-int		parser_check_syntax(char *line, t_data *data);
+char	*parser_check_syntax(char *line, t_data *data);
 
 void 	lines_free(t_line *lines);
 int		lines_evaluate_size(t_line *line, t_op op);

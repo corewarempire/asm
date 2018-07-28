@@ -105,7 +105,7 @@ int		file_write(t_data *data, int fd, char *path)
 	}
 	ft_printf("Writing output program to %s\n", file_name);
 	free(file_name);
-	// file_write_header(data, fd);
+	file_write_header(data, fd);
 	line = data->lines;
 	while (line)
 	{

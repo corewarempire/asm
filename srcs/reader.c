@@ -40,16 +40,16 @@ int		reader_read(int fd, t_data *data)
 		nb_line++;
 		free(line);
 	}
-	printf("\nname: %s\ncomment: %s\n\n", data->name, data->comment);
-	printf("nb_label : %d\n\n", data->nb_label);
-	while (data->lines)
-	{
-		printf("label     : %s\n", data->lines->label);
-		printf("op_code   : %d\n", data->lines->command);
-		printf("nb_params : %d\n", data->lines->nb_params);
-		printf("params    : [%s][%s][%s]\n\n", data->lines->params[0],
-		data->lines->params[1], data->lines->params[2]);
-		data->lines = data->lines->next;
-	}
+	// printf("\nname: %s\ncomment: %s\n\n", data->name, data->comment);
+	// printf("nb_label : %d\n\n", data->nb_label);
+	// while (data->lines)
+	// {
+	// 	printf("label     : %s\n", data->lines->label);
+	// 	printf("op_code   : %d\n", data->lines->command);
+	// 	printf("nb_params : %d\n", data->lines->nb_params);
+	// 	printf("params    : [%s][%s][%s]\n\n", data->lines->params[0],
+	// 	data->lines->params[1], data->lines->params[2]);
+	// 	data->lines = data->lines->next;
+	// }
 	return (1);
 }
