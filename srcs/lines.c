@@ -48,25 +48,19 @@ int		lines_evaluate_size(t_line *line, t_op op)
 int		lines_review(t_data *data)
 {
 	t_line	*line;
-	int		line_nb;
 	t_op	op;
-	int		line_size;
 
 	line = data->lines;
-	line_nb = 1;
 	while (line)
 	{
+		line->index = data->prog_size;
 		op = data->op_tab[line->command - 1];
 		if (!parameters_check_legal(line, op)
 			|| (line->label && !labels_add(data, line)))
 			return (0);
 		parameters__set_code_byte(line);
-		line_size = lines_evaluate_size(line, op);
-		data->prog_size += line_size;
-		if (line->next)
-			line->next->index = line->index + line_size;
+		data->prog_size += lines_evaluate_size(line, op);
 		line = line->next;
-		line_nb++;
 	}
 	return (1);
 }

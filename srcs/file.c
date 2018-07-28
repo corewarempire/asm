@@ -65,12 +65,11 @@ void	file_write_parameters(t_data *data, t_line *line, int fd)
 
 void	file_write_header(t_data *data, int fd)
 {
-	int		padding;
+	int					padding;
+	long unsigned int 	buf;
 
-	ft_putchar_fd((char)(COREWAR_EXEC_MAGIC >> 24), fd);
-	ft_putchar_fd((char)(COREWAR_EXEC_MAGIC >> 16), fd);
-	ft_putchar_fd((char)(COREWAR_EXEC_MAGIC >> 8), fd);
-	ft_putchar_fd((char)COREWAR_EXEC_MAGIC, fd);
+	buf = COREWAR_EXEC_MAGIC;
+	ft_putnchar_fd((void *)buf, 4, fd);
 	padding = PROG_NAME_LENGTH - ft_strlen(data->name);
 	padding = padding > 0 ? padding + (padding % 4) + sizeof(unsigned int) : 0;
 	ft_putstr_fd(data->name, fd);
@@ -79,10 +78,8 @@ void	file_write_header(t_data *data, int fd)
 		ft_putchar_fd(0, fd);
 		padding--;
 	}
-	ft_putchar_fd((char)(data->prog_size >> 24), fd);
-	ft_putchar_fd((char)(data->prog_size >> 16), fd);
-	ft_putchar_fd((char)(data->prog_size >> 8), fd);
-	ft_putchar_fd((char)data->prog_size, fd);
+	buf = (long unsigned int)data->prog_size;
+	ft_putnchar_fd((void *)buf, 4, fd);
 	ft_putstr_fd(data->comment, fd);
 	padding = COMMENT_LENGTH - ft_strlen(data->comment) - 1;
 	padding = padding > 0 ? padding + padding % 4: 0;

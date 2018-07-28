@@ -41,7 +41,6 @@ int		reader_read(int fd, t_data *data)
 		free(line);
 	}
 	 printf("\nname: %s\ncomment: %s\n\n", data->name, data->comment);
-	 printf("nb_label : %d\n\n", data->nb_label);
 	 while (data->lines)
 	 {
 	 	printf("label     : %s\n", data->lines->label);
