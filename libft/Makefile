@@ -27,7 +27,7 @@ SOURCES = 	ft_lstdelone.c ft_strnequ.c ft_strclr.c ft_strdel.c ft_strncmp.c \
 			ft_printf_format.c ft_printf_width.c ft_printf_precision.c \
 			ft_printf_length.c ft_printf_type.c ft_printf_type_dec.c \
 			ft_printf_type_chars.c ft_printf_type_base.c ft_printf_type_others.c \
-			ft_atoi_long.c ft_isnumber.c ft_strtablen.c
+			ft_atoi_long.c ft_isnumber.c ft_strtablen.c ft_putnchar_fd.c
 BINARIES =	$(SOURCES:.c=.o)
 CC		 = 	gcc -Wall -Werror -Wextra
 
