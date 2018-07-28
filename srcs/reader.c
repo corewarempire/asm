@@ -6,7 +6,7 @@
 /*   By: sgalasso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/21 19:28:39 by sgalasso          #+#    #+#             */
-/*   Updated: 2018/07/28 21:50:56 by sgalasso         ###   ########.fr       */
+/*   Updated: 2018/07/28 22:32:08 by sgalasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ int		reader_read(int fd, t_data *data)
 		free(line);
 	}
 	 printf("\nname: %s\ncomment: %s\n\n", data->name, data->comment);
-	 printf("nb_label : %d\n\n", data->nb_label);
 	 while (data->lines)
 	 {
 	 	printf("label     : %s\n", data->lines->label);
