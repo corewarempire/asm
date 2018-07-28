@@ -31,7 +31,7 @@ int		reader_read(int fd, t_data *data)
 	}
 	while (get_next_line(fd, &line) > 0)
 	{
-		if (!(line = parser_check_syntax(line, data)))
+		if (!parser_check_syntax(line, data))
 		{
 			ft_printf("Syntax error: line %d, (%s)\n", nb_line, line);
 			free(line);
@@ -40,15 +40,15 @@ int		reader_read(int fd, t_data *data)
 		nb_line++;
 		free(line);
 	}
-	 printf("\nname: %s\ncomment: %s\n\n", data->name, data->comment);
-	 while (data->lines)
-	 {
-	 	printf("label     : %s\n", data->lines->label);
-	 	printf("op_code   : %d\n", data->lines->command);
-	 	printf("nb_params : %d\n", data->lines->nb_params);
-	 	printf("params    : [%s][%s][%s]\n\n", data->lines->params[0],
-	 	data->lines->params[1], data->lines->params[2]);
-	 	data->lines = data->lines->next;
-	}
+	//  printf("\nname: %s\ncomment: %s\n\n", data->name, data->comment);
+	//  while (data->lines)
+	//  {
+	//  	printf("label     : %s\n", data->lines->label);
+	//  	printf("op_code   : %d\n", data->lines->command);
+	//  	printf("nb_params : %d\n", data->lines->nb_params);
+	//  	printf("params    : [%s][%s][%s]\n\n", data->lines->params[0],
+	//  	data->lines->params[1], data->lines->params[2]);
+	//  	data->lines = data->lines->next;
+	// }
 	return (1);
 }

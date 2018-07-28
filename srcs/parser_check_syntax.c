@@ -6,7 +6,7 @@
 /*   By: sgalasso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/21 19:24:04 by sgalasso          #+#    #+#             */
-/*   Updated: 2018/07/28 22:52:45 by sgalasso         ###   ########.fr       */
+/*   Updated: 2018/07/28 22:20:50 by sgalasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,18 +58,13 @@ int		parser_is_label(char *str)
 
 char	*parser_cut_line(char *line)
 {
-	char	*cut;
 	int		i;
 
 	i = 0;
 	while (line[i] && line[i] != '#')
 		i++;
 	if (line[i] == '#')
-	{
-		if (!(cut = ft_strsub(line, 0, i))) // LEAK ?
-			return (0);
-		return (cut);
-	}
+		line[i] = 0;
 	return (line);
 }
 
