@@ -1,22 +1,18 @@
+echo "------------------ clear everything ------------------------"
+
 rm files1/*.cor
 rm files2/*.cor
 
+echo "\n"
+
 for file in files1/*
 do
-	echo "try $file"
+	name=$(echo $file | cut -d/ -f2)
+	echo "------------------ try $name ------------------------"
+	trimmed=$(echo $name | cut -d. -f1)
 	./asm $file
-done
-
-for file in files2/*
-do
-	echo "try $file"
-	./group-asm $file
-done
-
-cd files1
-
-for file in *.cor
-do
-	echo "diff on $file"
-	diff $file ../files2/$file
+	./group-asm files2/$name
+	diff files1/$trimmed.cor files2/$trimmed.cor
+	echo $?
+	echo "\n"
 done
