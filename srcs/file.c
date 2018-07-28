@@ -96,7 +96,7 @@ int		file_write(t_data *data, int fd, char *path)
 	t_line	*line;
 
 	if (!(file_name = file_create_name(path))
-		|| (fd = open(file_name, O_WRONLY)) == -1)
+		|| (fd = open(file_name, O_WRONLY | O_CREAT, S_IRWXU | S_IRWXO)) == -1)
 	{
 		if (file_name)
 			free(file_name);
