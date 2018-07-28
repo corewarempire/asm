@@ -6,7 +6,7 @@
 /*   By: sgalasso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/21 19:24:04 by sgalasso          #+#    #+#             */
-/*   Updated: 2018/07/26 18:56:42 by sgalasso         ###   ########.fr       */
+/*   Updated: 2018/07/28 18:32:41 by sgalasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -240,29 +240,32 @@ int		parser_check_syntax(char *line, t_data *data)
 	// Traitement du contenu
 	if (!(line = parser_handle_label(line, new, data)))
 		return (0);
-	if (!(line = parser_handle_inst(line, data->op_tab, new)))
-		return (0);
-	if (!(line = parser_handle_param(line, new, nbp++)))
-		return (0);
-	while (nbp < new->nb_params && *line)
+	if (!parser_is_empty(line))
 	{
-		while (*line && (*line == ' ' || *line == '\t'))
-			line++;
-		if (*line != ',')
+		if (!(line = parser_handle_inst(line, data->op_tab, new)))
 			return (0);
-		line++;
-		while (*line && (*line == ' ' || *line == '\t'))
-			line++;
 		if (!(line = parser_handle_param(line, new, nbp++)))
 			return (0);
-	}
-	while (*line && (*line == ' ' || *line == '\t'))
-		line++;
-	if (*line != 0 || nbp != new->nb_params)
-	{
-		printf("line : %s\n", line);
-		printf("nbp : %d | sur : %d\n", nbp, new->nb_params);
-		return (0);
+		while (nbp < new->nb_params && *line)
+		{
+			while (*line && (*line == ' ' || *line == '\t'))
+				line++;
+			if (*line != ',')
+				return (0);
+			line++;
+			while (*line && (*line == ' ' || *line == '\t'))
+				line++;
+			if (!(line = parser_handle_param(line, new, nbp++)))
+				return (0);
+		}
+		while (*line && (*line == ' ' || *line == '\t'))
+			line++;
+		if (*line != 0 || nbp != new->nb_params)
+		{
+			printf("line : %s\n", line);
+			printf("nbp : %d | sur : %d\n", nbp, new->nb_params);
+			return (0);
+		}
 	}
 	parser_lstaddend(new, data);
 	//_________________________
