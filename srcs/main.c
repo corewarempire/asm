@@ -6,7 +6,7 @@
 /*   By: sgalasso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/25 19:06:19 by sgalasso          #+#    #+#             */
-/*   Updated: 2018/07/28 19:47:36 by sgalasso         ###   ########.fr       */
+/*   Updated: 2018/07/28 21:50:40 by sgalasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int		main(int ac, char **av)
 		|| !labels_replace(&data))
 		error_exit(&data);
 	close(fd);
+	exit(EXIT_FAILURE);
 	if (!file_write(&data, fd, av[1]))
 		error_exit(&data);
 	data_free(&data);
