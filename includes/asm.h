@@ -6,7 +6,7 @@
 /*   By: sgalasso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/19 19:40:53 by sgalasso          #+#    #+#             */
-/*   Updated: 2018/07/29 01:35:34 by sgalasso         ###   ########.fr       */
+/*   Updated: 2018/07/29 02:23:25 by sgalasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ struct	s_data
 	t_line			*lines;
 	t_label			*labels;
 	t_op			*op_tab;
+	int				line_nb;
 	int				prog_size;
 	char			*name;
 	char			*comment;

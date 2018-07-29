@@ -6,7 +6,7 @@
 /*   By: meyami <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/26 20:38:02 by meyami            #+#    #+#             */
-/*   Updated: 2018/07/26 20:38:11 by meyami           ###   ########.fr       */
+/*   Updated: 2018/07/29 02:22:00 by sgalasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	data_initialize(t_data *data)
 	data->name = 0;
 	data->comment = 0;
 	data->lines = 0;
+	data->line_nb = 0;
 	data->labels = 0;
 	data->prog_size = 0;
 	data->op_tab = g_op_tab;
