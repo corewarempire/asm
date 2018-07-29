@@ -1,8 +1,6 @@
-
 #debut du mega truc qu'il est trop dur a faire
-	
-		.name "Jumper !"
-#dndrgjn
+
+.name "Jumper !"
 .comment "en fait C forker !"
 
 gobepc:	st r1,:buff
