@@ -32,6 +32,7 @@ int		labels_add(t_data *data, t_line *line)
 	}
 	new->name = line->label;
 	new->destination = line;
+	new->next = 0;
 	if (!data->labels)
 		data->labels = new;
 	else
@@ -56,13 +57,31 @@ int		labels_find(t_data *data, int line_nb, char *to_find)
 		label = label->next;
 	}
 	ft_printf("Error: label not found in line %d\n", line_nb);
-	return (0);
+	return (-1);
+}
+
+char	*labels_modify_parameter(int direct, t_line *line, int destination)
+{
+	char *s;
+	char *s_dir;
+
+	if (direct)
+	{
+		s = ft_itoa(destination);
+		s_dir = ft_strjoin("%", s);
+		free(s);
+		return (s_dir);
+	}
+	return (ft_itoa(destination < line->index
+			? MEM_SIZE - (line->index - destination)
+			: line->index - destination));
 }
 
 int		labels_replace(t_data *data)
 {
 	t_line	*line;
 	int		target;
+	int		direct;
 	int		i;
 
 	line = data->lines;
@@ -71,15 +90,16 @@ int		labels_replace(t_data *data)
 		i = -1;
 		while (++i < line->nb_params)
 		{
-			if (line->params[i][0] == LABEL_CHAR)
+			direct = line->params[i][1] == LABEL_CHAR;
+			if (line->params[i][0] == LABEL_CHAR || direct)
 			{
-				if (!(target = labels_find(data,
-											line->line_nb, line->params[i])))
+				if ((target = labels_find(data, line->line_nb,
+											line->params[i] + 1 + direct)) == -1)
 					return (0);
+				printf("parameter %s points to index %d, it's now ", line->params[i], target);
 				free(line->params[i]);
-				line->params[i] = ft_itoa(target < line->index
-								? MEM_SIZE - (line->index - target)
-								: line->index - target);
+				line->params[i] = labels_modify_parameter(direct, line, target);
+				printf("is now %s\n", line->params[i]);
 			}
 		}
 		line = line->next;

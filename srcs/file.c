@@ -29,18 +29,23 @@ char	*file_create_name(char *path)
 
 void	file_write_number(int nb, char type, int direct_size, int fd)
 {
-	int i;
+	int 	i;
+	char	*buf;
 
+	buf = (char *)&nb;
 	if (type == T_REG)
 		ft_putchar_fd((char)nb, fd);
 	else if (type == T_DIR || type == T_IND)
 	{
 		i = type == T_DIR ? direct_size : 2;
 		while (i--)
-		{
-			ft_putchar_fd((char)nb, fd);
-			nb = nb >> 8;
-		}
+			ft_putchar_fd(buf[i], fd);
+	}
+	else
+	{
+		i = 4;
+		while (i--)
+			ft_putchar_fd(buf[i], fd);
 	}
 }
 
@@ -66,23 +71,20 @@ void	file_write_parameters(t_data *data, t_line *line, int fd)
 void	file_write_header(t_data *data, int fd)
 {
 	int					padding;
-	long unsigned int 	buf;
 
-	buf = COREWAR_EXEC_MAGIC;
-	ft_putnchar_fd((void *)buf, 4, fd);
-	padding = PROG_NAME_LENGTH - ft_strlen(data->name);
-	padding = padding > 0 ? padding + (padding % 4) + sizeof(unsigned int) : 0;
+	file_write_number(COREWAR_EXEC_MAGIC, 0, 0, fd);
+	padding = PROG_NAME_LENGTH + 1 - ft_strlen(data->name);
+	padding = padding > 0 ? padding + 3 : 0;
 	ft_putstr_fd(data->name, fd);
 	while (padding)
 	{
 		ft_putchar_fd(0, fd);
 		padding--;
 	}
-	buf = (long unsigned int)data->prog_size;
-	ft_putnchar_fd((void *)buf, 4, fd);
+	file_write_number(data->prog_size, 0, 0, fd);
 	ft_putstr_fd(data->comment, fd);
-	padding = COMMENT_LENGTH - ft_strlen(data->comment) - 1;
-	padding = padding > 0 ? padding + padding % 4: 0;
+	padding = COMMENT_LENGTH + 1 - ft_strlen(data->comment);
+	padding = padding > 0 ? padding + 3 : 0;
 	while (padding)
 	{
 		ft_putchar_fd(0, fd);

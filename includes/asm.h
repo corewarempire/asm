@@ -63,6 +63,7 @@ struct	s_data
 	t_op			*op_tab;
 	int				line_nb;
 	int				prog_size;
+	unsigned		magic;
 	char			*name;
 	char			*comment;
 };
@@ -96,6 +97,7 @@ int		lines_review(t_data *data);
 void	labels_free(t_label *labels);
 int		labels_add(t_data *data, t_line *line);
 int		labels_find(t_data *data, int line_nb, char *to_find);
+char	*labels_modify_parameter(int shift, t_line *line, int destination);
 int		labels_replace(t_data *data);
 
 void	parameters_set_types(t_line *line);
