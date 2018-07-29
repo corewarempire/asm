@@ -49,13 +49,10 @@ int		lines_review(t_data *data)
 {
 	t_line	*line;
 	t_op	op;
-	int 	line_nb;
 
-	line_nb = 0;
 	line = data->lines;
 	while (line)
 	{
-		line->line_nb = line_nb++;
 		line->index = data->prog_size;
 		op = data->op_tab[line->command - 1];
 		if (!parameters_check_legal(line, op)
