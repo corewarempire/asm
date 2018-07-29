@@ -6,7 +6,7 @@
 /*   By: sgalasso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/19 21:53:25 by sgalasso          #+#    #+#             */
-/*   Updated: 2018/07/29 02:20:44 by sgalasso         ###   ########.fr       */
+/*   Updated: 2018/07/29 22:32:03 by sgalasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ int		ft_handle_name(char *line, t_data *data)
 		i++;
 	if (line[i] != '"' && line[i + 1] != 0)
 		return (0);
+	if (ft_strlen(line) - (start + 2) > PROG_NAME_LENGTH)
+		return (0);
 	if (!(data->name =
 	ft_strsub(line, start + 1, ft_strlen(line) - (start + 2))))
 		return (0);
@@ -51,6 +53,8 @@ int		ft_handle_comment(char *line, t_data *data)
 	while (line[i] && line[i] != '"')
 		i++;
 	if (line[i] != '"' && line[i + 1] != 0)
+		return (0);
+	if (ft_strlen(line) - (start + 2) > COMMENT_LENGTH)
 		return (0);
 	if (!(data->comment =
 	ft_strsub(line, start + 1, ft_strlen(line) - (start + 2))))
@@ -84,5 +88,6 @@ int		reader_check_header(t_data *data, char *line)
 	}
 	else if (*line == '#' || *line == 0)
 		return (1);
+	ft_printf("Header error: line %d, (%s)\n", data->line_nb, line);
 	return (0);
 }

@@ -1,0 +1,10 @@
+
+
+* ifndef sur op.h
+* leaks
+* overflows/underflows
+* norminette
+* norme spe : g_, operateurs a gauche etc...
+* fonctions interdites
+* fichier auteur
+* protection malloc
