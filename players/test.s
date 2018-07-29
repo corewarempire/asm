@@ -16,4 +16,4 @@
 #ld   %0,   r5
 #zjmp	%:start
 
-ld	%-5,	r5
+	start:		ld	%-5,	r5

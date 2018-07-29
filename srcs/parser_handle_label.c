@@ -6,7 +6,7 @@
 /*   By: sgalasso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/28 23:50:48 by sgalasso          #+#    #+#             */
-/*   Updated: 2018/07/29 01:29:57 by sgalasso         ###   ########.fr       */
+/*   Updated: 2018/07/29 02:44:41 by sgalasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	*parser_handle_label(char *line, t_line *new)
 	int temp;
 
 	i = 0;
-	while (line[i] && line[i] == ' ' && line[i] == '\t')
+	while (line[i] && (line[i] == ' ' || line[i] == '\t'))
 		i++;
 	temp = i;
 	if (line[i] == ':')
