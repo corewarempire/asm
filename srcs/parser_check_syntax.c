@@ -6,7 +6,7 @@
 /*   By: sgalasso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/21 19:24:04 by sgalasso          #+#    #+#             */
-/*   Updated: 2018/07/29 01:54:04 by sgalasso         ###   ########.fr       */
+/*   Updated: 2018/07/29 02:26:44 by sgalasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ int		parser_inst_sample(char *line, t_data *data, t_line *new, int nbp)
 		line++;
 	if (*line != 0)
 		return (0);
+	new->line_nb = data->line_nb;
 	return (1);
 }
 
