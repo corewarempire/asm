@@ -55,7 +55,7 @@ void	file_write_parameters(t_data *data, t_line *line, int fd)
 	op = data->op_tab[line->command - 1];
 	direct_size = 4 - 2 * op.direct_size;
 	i = -1;
-	while (++i)
+	while (++i < line->nb_params)
 	{
 		shift = line->params[i][0] == 'r' || line->params[i][0] == '%';
 		nb = ft_atoi(line->params[i] + shift);

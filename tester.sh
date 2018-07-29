@@ -12,8 +12,8 @@ do
 	name=$(echo $file | cut -d/ -f2)
 	echo "------------------ try $name ------------------------"
 	trimmed=$(echo $name | cut -d. -f1)
-	./asm $file > /dev/null 2>&1
-	./group-asm files2/$name > /dev/null 2>&1
+	theirs_result=$(./asm $file > /dev/null)
+	our_result=$(./group-asm files2/$name)
 	if [ -f files1/$trimmed.cor ] && [ -f files2/$trimmed.cor ]
 	then
 		echo "${GREEN}files are both written${NC}"
@@ -29,6 +29,7 @@ do
 		echo "${GREEN}both files are not written${NC}"
 	else
 		echo "${RED}PROBLEM${NC}"
+		echo $our_result
 	fi
 
 done
