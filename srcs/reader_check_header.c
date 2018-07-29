@@ -6,7 +6,7 @@
 /*   By: sgalasso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/19 21:53:25 by sgalasso          #+#    #+#             */
-/*   Updated: 2018/07/26 14:54:44 by sgalasso         ###   ########.fr       */
+/*   Updated: 2018/07/29 02:00:58 by sgalasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ int		ft_is_comment(char *line)
 
 int		reader_check_header(t_data *data, char *line)
 {
+	while (*line == ' ' || *line == '\t')
+		line++;
 	if (ft_is_name(line))
 	{
 		if (ft_handle_name(line, data))
@@ -80,5 +82,7 @@ int		reader_check_header(t_data *data, char *line)
 		if (ft_handle_comment(line, data))
 			return (1);
 	}
-	return (line[0] == '\n' && line[1] == 0) ? 1 : 0;
+	else if (*line == '#' || *line == 0)
+		return (1);
+	return (0);
 }
