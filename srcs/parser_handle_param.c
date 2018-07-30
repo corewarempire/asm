@@ -33,8 +33,9 @@ char	*parser_get_param(char *line, t_line *new, int nbp)
 	if ((param[0] == '%' && parser_is_digits(param + 1))
 	|| (param[0] == '%' && param[1] == ':' && parser_is_label(param + 2))
 	|| (param[0] == ':' && parser_is_label(param + 1))
-	|| (parser_is_digits(param + 1) && ft_atoi(param + 1) < 100
-	&& ft_atoi(param + 1) > 0))
+	|| (param[0] == 'r' && parser_is_digits(param + 1) && ft_atoi(param + 1) < 100
+	&& ft_atoi(param + 1) >= 0)
+	|| (param[0] != 'r' && parser_is_digits(param + 1)))
 	{
 		new->params[nbp] = param;
 		line += i;

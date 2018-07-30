@@ -53,7 +53,8 @@ char	parameters_encode(char type, int shift)
 
 void	parameters__set_code_byte(t_line *line)
 {
-	if (line->command == 1 || line->command == 9)
+	if (line->command == 1 || line->command == 9
+		|| line->command == 12 || line->command == 15)
 		return ;
 	line->params_code_byte += parameters_encode(line->params_type[0], 6)
 							+ parameters_encode(line->params_type[1], 4)

@@ -8,3 +8,5 @@
 * fonctions interdites
 * fichier auteur
 * protection malloc
+
+* label et instruction sur des lignes differentes

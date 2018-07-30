@@ -36,17 +36,20 @@ int		lines_evaluate_size(t_line *line, t_op op)
 	direct_size = 4 - 2 * op.direct_size;
 	size = 1;
 	i = -1;
-	printf("line %d, command is %s, direct params should be of size %d\n", line->line_nb, op.name, op.direct_size ? 2 : 4);
+	printf("------------------------------------------\n");
+	printf("line:      %d\nindex:     %d\ncommand:   %s\ncode byte: %s\n\n", line->line_nb, line->index, op.name, line->params_code_byte ? "yes" : "no");
 	while (++i < line->nb_params)
 	{
-		printf("parameter %s has size %d\n", line->params[i], (line->params_type[i] == T_REG)
+		printf("parameter: %s\ntype:      %s\nsize:      %d\n\n", line->params[i],
+				line->params_type[i] == T_REG ? "reg" : line->params_type[i] == T_DIR ? "dir" : "ind",
+		 (line->params_type[i] == T_REG)
 				+ ((line->params_type[i] == T_DIR) * direct_size)
 				+ ((line->params_type[i] == T_IND) * IND_SIZE));
 		size += (line->params_type[i] == T_REG)
 				+ ((line->params_type[i] == T_DIR) * direct_size)
 				+ ((line->params_type[i] == T_IND) * IND_SIZE);
 	}
-	printf("size of line %d: %d\n", line->line_nb, size);
+	printf("total size %d\n", size);
 	return (size);
 }
 
