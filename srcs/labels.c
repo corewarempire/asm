@@ -53,7 +53,7 @@ int		labels_find(t_data *data, int line_nb, char *to_find)
 	while (label)
 	{
 		if (ft_strequ(label->name, to_find))
-			return (label->destination->index);
+			return (label->destination ? label->destination->index : data->prog_size);
 		label = label->next;
 	}
 	ft_printf("Error: label not found in line %d\n", line_nb);

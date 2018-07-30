@@ -35,26 +35,26 @@ int		lines_evaluate_size(t_line *line, t_op op)
 	direct_size = 4 - 2 * op.direct_size;
 	size = 1 + (line->params_code_byte != 0);
 	i = -1;
-	// printf("------------------------------------------\n");
-	// printf("line:      %d\nindex:     %d\nlabel:     %s\ncommand:   %s\ncode byte: %s\n\n",
-	// 		line->line_nb,
-	// 		line->index,
-	// 		line->label ? line->label : "no",
-	// 		op.name,
-	// 		line->params_code_byte ? "yes" : "no");
+	printf("------------------------------------------\n");
+	printf("line:      %d\nindex:     %d\nlabel:     %s\ncommand:   %s\ncode byte: %s\n\n",
+			line->line_nb,
+			line->index,
+			line->label ? line->label : "no",
+			op.name,
+			line->params_code_byte ? "yes" : "no");
 	while (++i < line->nb_params)
 	{
-		// printf("parameter: %s\ntype:      %s\nsize:      %d\n\n",
-		// 		line->params[i],
-		// 		line->params_type[i] == T_REG ? "reg" : line->params_type[i] == T_DIR ? "dir" : "ind",
-		// 		(line->params_type[i] == T_REG)
-		// 		+ ((line->params_type[i] == T_DIR) * direct_size)
-		// 		+ ((line->params_type[i] == T_IND) * IND_SIZE));
+		printf("parameter: %s\ntype:      %s\nsize:      %d\n\n",
+				line->params[i],
+				line->params_type[i] == T_REG ? "reg" : line->params_type[i] == T_DIR ? "dir" : "ind",
+				(line->params_type[i] == T_REG)
+				+ ((line->params_type[i] == T_DIR) * direct_size)
+				+ ((line->params_type[i] == T_IND) * IND_SIZE));
 		size += (line->params_type[i] == T_REG)
 				+ ((line->params_type[i] == T_DIR) * direct_size)
 				+ ((line->params_type[i] == T_IND) * IND_SIZE);
 	}
-	// printf("total size %d\n", size);
+	printf("total size %d\n", size);
 	return (size);
 }
 
