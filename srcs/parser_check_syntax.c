@@ -6,7 +6,7 @@
 /*   By: sgalasso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/21 19:24:04 by sgalasso          #+#    #+#             */
-/*   Updated: 2018/07/29 03:09:53 by sgalasso         ###   ########.fr       */
+/*   Updated: 2018/07/30 20:53:29 by sgalasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,16 +86,13 @@ char	*parser_check_syntax(char *line, t_data *data, int fd)
 		return (0);
 	if (parser_is_empty(line))
 	{
-		//free(line); // LEAK ?
+		free(temp);
 		if (get_next_line(fd, &line) <= 0)
 			return (0);
 		temp = line;
 	}
-	if (!parser_is_empty(line))
-	{
-		if (!parser_inst_sample(line, data, new, nbp))
-			return (0);
-	}
+	if (!parser_is_empty(line) && !parser_inst_sample(line, data, new, nbp))
+		return (0);
 	parser_lstaddend(new, data);
 	return (temp);
 }

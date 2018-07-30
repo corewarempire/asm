@@ -6,7 +6,7 @@
 /*   By: sgalasso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/21 19:28:39 by sgalasso          #+#    #+#             */
-/*   Updated: 2018/07/29 23:19:09 by sgalasso         ###   ########.fr       */
+/*   Updated: 2018/07/30 20:46:55 by sgalasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int		reader_parser(t_data *data, int fd, char *line)
 {
 	while (get_next_line(fd, &line) > 0)
 	{
-		if (!parser_check_syntax(line, data, fd))
+		if (!(line = parser_check_syntax(line, data, fd)))
 		{
 			ft_printf("Syntax error: line %d, (%s)\n", data->line_nb, line);
 			free(line);
