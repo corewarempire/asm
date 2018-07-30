@@ -23,7 +23,6 @@ void	lines_free(t_line *lines)
 		lines->nb_params--;
 	}
 	free(lines->params);
-	free(lines->label);
 	free(lines);
 }
 
@@ -69,8 +68,7 @@ int		lines_review(t_data *data)
 	{
 		line->index = data->prog_size;
 		op = data->op_tab[line->command - 1];
-		if (!parameters_check_legal(line, op)
-			|| (line->label && !labels_add(data, line)))
+		if (!parameters_check_legal(line, op))
 			return (0);
 		parameters__set_code_byte(line);
 		data->prog_size += lines_evaluate_size(line, op);

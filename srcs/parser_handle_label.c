@@ -47,7 +47,7 @@ char	*parser_handle_label(char *line, t_line *new, t_data *data)
 	if (line[i] == ':')
 	{
 		//new->label = ft_strsub(line, temp, i - temp);
-		if !(labels_add(data, new, ft_strsub(line, temp, i - temp))
+		if (!labels_add(data, new, ft_strsub(line, temp, i - temp)))
 			return (0);
 		line += i + 1;
 		return (line);
