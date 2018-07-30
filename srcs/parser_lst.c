@@ -6,7 +6,7 @@
 /*   By: sgalasso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/28 23:46:12 by sgalasso          #+#    #+#             */
-/*   Updated: 2018/07/30 22:14:48 by sgalasso         ###   ########.fr       */
+/*   Updated: 2018/07/30 23:44:30 by sgalasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,17 @@ t_line	*parser_lstnew(void)
 	return (new);
 }
 
+int		parser_handle_if_null(t_line *new)
+{
+	if (new->command == 0)
+	{
+		lines_free(new);
+		return (1);
+	}
+	else
+		return (0);
+}
+
 void	parser_lstaddend(t_line *new, t_data *data)
 {
 	t_line *start;
@@ -44,6 +55,8 @@ void	parser_lstaddend(t_line *new, t_data *data)
 	}
 	else
 	{
+		if (parser_handle_if_null(new))
+			return ;
 		while (data->lines->next)
 			data->lines = data->lines->next;
 		data->lines->next = new;
