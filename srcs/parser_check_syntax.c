@@ -6,7 +6,7 @@
 /*   By: sgalasso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/21 19:24:04 by sgalasso          #+#    #+#             */
-/*   Updated: 2018/07/30 20:53:29 by sgalasso         ###   ########.fr       */
+/*   Updated: 2018/07/30 22:16:28 by sgalasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,25 @@ int		parser_inst_sample(char *line, t_data *data, t_line *new, int nbp)
 	return (1);
 }
 
+char	*parser_multiple_labels(char *line, t_data *data, int fd, t_line *new)
+{
+	char	*temp;
+	
+	temp = line;
+	if (!(line = parser_handle_label(line, new, data)))
+		return (0);
+	while (parser_is_empty(line))
+	{
+		free(temp);
+		if (get_next_line(fd, &line) <= 0)
+			return (0);
+		temp = line;
+		if (!(line = parser_handle_label(line, new, data)))
+			return (0);
+	}
+	return (temp);
+}
+
 char	*parser_check_syntax(char *line, t_data *data, int fd)
 {
 	char	*temp;
@@ -82,15 +101,8 @@ char	*parser_check_syntax(char *line, t_data *data, int fd)
 		return (temp);
 	if (!(new = parser_lstnew()))
 		return (0);
-	if (!(line = parser_handle_label(line, new)))
+	if (!(temp = parser_multiple_labels(line, data, fd, new)))
 		return (0);
-	if (parser_is_empty(line))
-	{
-		free(temp);
-		if (get_next_line(fd, &line) <= 0)
-			return (0);
-		temp = line;
-	}
 	if (!parser_is_empty(line) && !parser_inst_sample(line, data, new, nbp))
 		return (0);
 	parser_lstaddend(new, data);

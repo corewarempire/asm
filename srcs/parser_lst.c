@@ -6,7 +6,7 @@
 /*   By: sgalasso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/28 23:46:12 by sgalasso          #+#    #+#             */
-/*   Updated: 2018/07/29 01:31:26 by sgalasso         ###   ########.fr       */
+/*   Updated: 2018/07/30 22:14:48 by sgalasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ t_line	*parser_lstnew(void)
 	if (!(new = (t_line *)(malloc(sizeof(t_line)))))
 		return (0);
 	new->index = 0;
-	new->label = 0;
 	new->command = 0;
 	new->nb_params = 0;
 	if (!(new->params = (char **)(malloc(sizeof(char *) * (4)))))

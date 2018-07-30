@@ -6,7 +6,7 @@
 /*   By: meyami <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/26 20:38:23 by meyami            #+#    #+#             */
-/*   Updated: 2018/07/26 20:38:26 by meyami           ###   ########.fr       */
+/*   Updated: 2018/07/30 22:14:34 by sgalasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	labels_free(t_label *labels)
 	free(labels);
 }
 
-int		labels_add(t_data *data, t_line *line)
+int		labels_add(t_data *data, t_line *line, char *name)
 {
 	t_label *new;
 	t_label *ptr;
@@ -30,7 +30,7 @@ int		labels_add(t_data *data, t_line *line)
 		ft_printf("Error in saving the line %d label\n", line->line_nb);
 		return (0);
 	}
-	new->name = line->label;
+	new->name = name;
 	new->destination = line;
 	new->next = 0;
 	if (!data->labels)
