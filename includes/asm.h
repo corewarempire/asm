@@ -80,7 +80,7 @@ int		reader_check_header(t_data *data, char *line);
 int		parser_is_digits(char *str);
 int		parser_is_label(char *str);
 int		ft_partof(char c, char *str);
-char	*parser_check_syntax(char *line, t_data *data);
+char	*parser_check_syntax(char *line, t_data *data, int fd);
 t_line	*parser_lstnew();
 void	parser_lstaddend(t_line *new, t_data *data);
 int		parser_is_label(char *str);
