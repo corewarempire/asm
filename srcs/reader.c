@@ -32,7 +32,7 @@ int		reader_parser(t_data *data, int fd, char *line)
 {
 	while (get_next_line(fd, &line) > 0)
 	{
-		if (!parser_check_syntax(line, data))
+		if (!parser_check_syntax(line, data, fd))
 		{
 			ft_printf("Syntax error: line %d, (%s)\n", data->line_nb, line);
 			free(line);

@@ -68,7 +68,7 @@ int		parser_inst_sample(char *line, t_data *data, t_line *new, int nbp)
 	return (1);
 }
 
-char	*parser_check_syntax(char *line, t_data *data)
+char	*parser_check_syntax(char *line, t_data *data, int fd)
 {
 	char	*temp;
 	t_line	*new;
@@ -84,6 +84,13 @@ char	*parser_check_syntax(char *line, t_data *data)
 		return (0);
 	if (!(line = parser_handle_label(line, new)))
 		return (0);
+	if (parser_is_empty(line))
+	{
+		//free(line); // LEAK ?
+		if (get_next_line(fd, &line) <= 0)
+			return (0);
+		temp = line;
+	}
 	if (!parser_is_empty(line))
 	{
 		if (!parser_inst_sample(line, data, new, nbp))
