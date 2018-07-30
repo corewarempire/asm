@@ -6,7 +6,7 @@
 /*   By: sgalasso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/29 00:04:08 by sgalasso          #+#    #+#             */
-/*   Updated: 2018/07/29 01:45:58 by sgalasso         ###   ########.fr       */
+/*   Updated: 2018/07/30 02:39:54 by sgalasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ char	*parser_get_param(char *line, t_line *new, int nbp)
 	if (!(param = ft_strsub(line, temp, i - temp)))
 		return (0);
 	if ((param[0] == '%' && parser_is_digits(param + 1))
-			|| (param[0] == '%' && param[1] == ':'
-			&& parser_is_label(param + 2))
-			|| (param[0] == ':' && parser_is_label(param + 1))
-			|| (parser_is_digits(param + 1)))
+	|| (param[0] == '%' && param[1] == ':' && parser_is_label(param + 2))
+	|| (param[0] == ':' && parser_is_label(param + 1))
+	|| (parser_is_digits(param + 1) && ft_atoi(param + 1) < 100
+	&& ft_atoi(param + 1) > 0))
 	{
 		new->params[nbp] = param;
 		line += i;
