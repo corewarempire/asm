@@ -6,7 +6,7 @@
 /*   By: sgalasso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/28 23:50:48 by sgalasso          #+#    #+#             */
-/*   Updated: 2018/07/30 22:12:08 by sgalasso         ###   ########.fr       */
+/*   Updated: 2018/07/30 23:25:37 by sgalasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ char	*parser_handle_label(char *line, t_line *new, t_data *data)
 	}
 	if (line[i] == ':')
 	{
-		//new->label = ft_strsub(line, temp, i - temp);
 		if (!labels_add(data, new, ft_strsub(line, temp, i - temp)))
 			return (0);
 		line += i + 1;

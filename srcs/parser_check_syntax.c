@@ -6,7 +6,7 @@
 /*   By: sgalasso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/21 19:24:04 by sgalasso          #+#    #+#             */
-/*   Updated: 2018/07/30 22:55:09 by sgalasso         ###   ########.fr       */
+/*   Updated: 2018/07/30 23:25:20 by sgalasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,16 +70,23 @@ int		parser_inst_sample(char *line, t_data *data, t_line *new, int nbp)
 
 char	*parser_multiple_labels(char **line, t_data *data, int fd, t_line *new)
 {
+	int		ret;
 	char	*temp;
 	
+	ret = 0;
 	temp = *line;
 	if (!(*line = parser_handle_label(*line, new, data)))
 		return (0);
 	while (parser_is_empty(*line))
 	{
-		free(temp);
-		if (get_next_line(fd, line) <= 0)
-			return (0);
+		while (parser_is_empty(*line))
+		{
+			//free(temp);
+			if ((ret = get_next_line(fd, line) == 0))
+				return (*line);
+			else if (ret < 0)
+				return (0);
+		}
 		temp = *line;
 		if (!(*line = parser_handle_label(*line, new, data)))
 			return (0);
@@ -96,23 +103,15 @@ char	*parser_check_syntax(char *line, t_data *data, int fd)
 	nbp = 0;
 	temp = line;
 	if (!(line = parser_cut_line(line)))
-	{printf("out 1\n");
 		return (0);
-	}
 	if (parser_is_empty(line))
 		return (temp);
 	if (!(new = parser_lstnew()))
-	{printf("out 2\n");
 		return (0);
-	}
 	if (!(temp = parser_multiple_labels(&line, data, fd, new)))
-	{printf("out 3\n");
 		return (0);
-	}
 	if (!parser_is_empty(line) && !parser_inst_sample(line, data, new, nbp))
-	{printf("out 4\n");
 		return (0);
-	}
 	parser_lstaddend(new, data);
 	return (temp);
 }

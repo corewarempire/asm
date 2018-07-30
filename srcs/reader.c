@@ -6,7 +6,7 @@
 /*   By: sgalasso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/21 19:28:39 by sgalasso          #+#    #+#             */
-/*   Updated: 2018/07/30 22:55:37 by sgalasso         ###   ########.fr       */
+/*   Updated: 2018/07/30 23:25:18 by sgalasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int		reader_parser(t_data *data, int fd, char *line)
 			return (0);
 		}
 		data->line_nb++;
-		free(line);
+		//free(line);
 	}
 	return (1);
 }
