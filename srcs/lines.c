@@ -34,10 +34,10 @@ int		lines_evaluate_size(t_line *line, t_op op)
 	int		i;
 
 	direct_size = 4 - 2 * op.direct_size;
-	size = 1 + line->params_code_byte != 0;
+	size = 1 + (line->params_code_byte != 0);
 	i = -1;
 	printf("------------------------------------------\n");
-	printf("line:      %d\nindex:     %d\nlabel:    %s\ncommand:   %s\ncode byte: %s\n\n",
+	printf("line:      %d\nindex:     %d\nlabel:     %s\ncommand:   %s\ncode byte: %s\n\n",
 			line->line_nb,
 			line->index,
 			line->label ? line->label : "no",
@@ -67,7 +67,7 @@ int		lines_review(t_data *data)
 	line = data->lines;
 	while (line)
 	{
-		line->index = data->prog_size ? data->prog_size + 1 : 0;
+		line->index = data->prog_size;
 		op = data->op_tab[line->command - 1];
 		if (!parameters_check_legal(line, op)
 			|| (line->label && !labels_add(data, line)))
