@@ -6,7 +6,7 @@
 /*   By: sgalasso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/29 00:04:08 by sgalasso          #+#    #+#             */
-/*   Updated: 2018/07/30 20:35:08 by sgalasso         ###   ########.fr       */
+/*   Updated: 2018/07/30 20:56:43 by sgalasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ char	*parser_get_param(char *line, t_line *new, int nbp)
 	int		i;
 
 	i = 0;
-	if (line[i] == 0)
-		return (0);
 	while (line[i] && (line[i] == ' ' || line[i] == '\t'))
 		i++;
 	temp = i;
@@ -33,8 +31,8 @@ char	*parser_get_param(char *line, t_line *new, int nbp)
 	if ((param[0] == '%' && parser_is_digits(param + 1))
 	|| (param[0] == '%' && param[1] == ':' && parser_is_label(param + 2))
 	|| (param[0] == ':' && parser_is_label(param + 1))
-	|| (param[0] == 'r' && parser_is_digits(param + 1) && ft_atoi(param + 1) < 100
-	&& ft_atoi(param + 1) >= 0)
+	|| (param[0] == 'r' && parser_is_digits(param + 1)
+	&& ft_atoi(param + 1) < 100 && ft_atoi(param + 1) >= 0)
 	|| (param[0] != 'r' && parser_is_digits(param + 1)))
 	{
 		new->params[nbp] = param;
