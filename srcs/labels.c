@@ -65,9 +65,7 @@ char	*labels_modify_parameter(int direct, t_line *line, int destination)
 	char *s;
 	char *s_dir;
 
-	s = ft_itoa(destination < line->index
-			? MEM_SIZE - (line->index - destination)
-			: destination - line->index);
+	s = ft_itoa((destination - line->index) % MEM_SIZE);
 	if (direct)
 	{
 		s_dir = ft_strjoin("%", s);

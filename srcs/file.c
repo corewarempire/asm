@@ -70,21 +70,23 @@ void	file_write_parameters(t_data *data, t_line *line, int fd)
 
 void	file_write_header(t_data *data, int fd)
 {
-	int					padding;
+	int		padding;
 
 	file_write_number(COREWAR_EXEC_MAGIC, 0, 0, fd);
-	padding = PROG_NAME_LENGTH + 1 - ft_strlen(data->name);
-	padding += (PROG_NAME_LENGTH + 1) % 4;
 	ft_putstr_fd(data->name, fd);
-	while (padding)
+	padding = (PROG_NAME_LENGTH + 1);
+	padding += 4 - padding % 4;
+	padding -= ft_strlen(data->name);
+	while (padding > 0)
 	{
 		ft_putchar_fd(0, fd);
 		padding--;
 	}
 	file_write_number(data->prog_size, 0, 0, fd);
 	ft_putstr_fd(data->comment, fd);
-	padding = COMMENT_LENGTH + 1 - ft_strlen(data->comment);
-	padding += (COMMENT_LENGTH + 1) % 4;
+	padding = (COMMENT_LENGTH + 1);
+	padding += 4 - padding % 4;
+	padding -= ft_strlen(data->comment);
 	while (padding)
 	{
 		ft_putchar_fd(0, fd);
