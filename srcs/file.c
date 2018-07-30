@@ -74,7 +74,7 @@ void	file_write_header(t_data *data, int fd)
 
 	file_write_number(COREWAR_EXEC_MAGIC, 0, 0, fd);
 	padding = PROG_NAME_LENGTH + 1 - ft_strlen(data->name);
-	padding = padding > 0 ? padding + 3 : 0;
+	padding += (PROG_NAME_LENGTH + 1) % 4;
 	ft_putstr_fd(data->name, fd);
 	while (padding)
 	{
@@ -84,7 +84,7 @@ void	file_write_header(t_data *data, int fd)
 	file_write_number(data->prog_size, 0, 0, fd);
 	ft_putstr_fd(data->comment, fd);
 	padding = COMMENT_LENGTH + 1 - ft_strlen(data->comment);
-	padding = padding > 0 ? padding + 3 : 0;
+	padding += (COMMENT_LENGTH + 1) % 4;
 	while (padding)
 	{
 		ft_putchar_fd(0, fd);

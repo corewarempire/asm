@@ -65,16 +65,16 @@ char	*labels_modify_parameter(int direct, t_line *line, int destination)
 	char *s;
 	char *s_dir;
 
+	s = ft_itoa(destination < line->index
+			? MEM_SIZE - (line->index - destination)
+			: destination - line->index);
 	if (direct)
 	{
-		s = ft_itoa(destination);
 		s_dir = ft_strjoin("%", s);
 		free(s);
 		return (s_dir);
 	}
-	return (ft_itoa(destination < line->index
-			? MEM_SIZE - (line->index - destination)
-			: line->index - destination));
+	return (s);
 }
 
 int		labels_replace(t_data *data)
@@ -96,10 +96,8 @@ int		labels_replace(t_data *data)
 				if ((target = labels_find(data, line->line_nb,
 											line->params[i] + 1 + direct)) == -1)
 					return (0);
-				printf("parameter %s points to index %d, it's now ", line->params[i], target);
 				free(line->params[i]);
 				line->params[i] = labels_modify_parameter(direct, line, target);
-				printf("is now %s\n", line->params[i]);
 			}
 		}
 		line = line->next;
