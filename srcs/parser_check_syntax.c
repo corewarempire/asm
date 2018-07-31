@@ -6,7 +6,7 @@
 /*   By: akarasso <akarasso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/21 19:24:04 by sgalasso          #+#    #+#             */
-/*   Updated: 2018/08/01 00:40:23 by sgalasso         ###   ########.fr       */
+/*   Updated: 2018/08/01 01:34:47 by sgalasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,13 +81,18 @@ char	*parser_check_syntax(char *line, t_data *data)
 	if (parser_is_empty(line))
 		return (temp);
 	if (!(new = parser_lstnew()))
+	{
+		ft_strdel(&temp);
 		return (0);
-	if (!(line = parser_handle_label(line, data)))
+	}
+	if (!(line = parser_handle_label(line, data))
+		|| !(line = parser_cut_line(line))
+		|| (!parser_is_empty(line) && !parser_inst_sample(line, data, new, nbp)))
+	{
+		lines_free(new);
+		ft_strdel(&temp);
 		return (0);
-	if (!(line = parser_cut_line(line)))
-		return (0);
-	if (!parser_is_empty(line) && !parser_inst_sample(line, data, new, nbp))
-		return (0);
+	}
 	parser_lstaddend(new, data);
 	return (temp);
 }

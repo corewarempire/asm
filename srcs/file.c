@@ -6,7 +6,7 @@
 /*   By: akarasso <akarasso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/26 20:38:19 by meyami            #+#    #+#             */
-/*   Updated: 2018/07/31 22:46:34 by akarasso         ###   ########.fr       */
+/*   Updated: 2018/08/01 00:49:23 by sgalasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,19 @@ char	*file_create_name(char *path)
 {
 	int		len;
 	char	*name;
+	char	*tmp;
 	char	*file_name;
 
 	len = (int) (ft_strrchr(path, '.') - path);
-	name = ft_strsub(path, 0, len);
-	file_name = ft_strjoin(name, ".cor");
+	if (!(name = ft_strsub(path, 0, len)))
+		return (0);
+	tmp = name;
+	if (!(file_name = ft_strjoin(name, ".cor")))
+	{
+		free(name);
+		return (0);
+	}
+	free(tmp);
 	return (file_name);
 }
 

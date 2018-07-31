@@ -6,7 +6,7 @@
 /*   By: akarasso <akarasso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/26 20:38:23 by meyami            #+#    #+#             */
-/*   Updated: 2018/07/31 19:08:59 by akarasso         ###   ########.fr       */
+/*   Updated: 2018/08/01 00:46:14 by sgalasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	labels_free(t_label *labels)
 	if (!labels)
 		return ;
 	labels_free(labels->next);
+	free(labels->name);
 	free(labels);
 }
 

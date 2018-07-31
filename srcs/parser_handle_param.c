@@ -6,7 +6,7 @@
 /*   By: sgalasso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/29 00:04:08 by sgalasso          #+#    #+#             */
-/*   Updated: 2018/07/30 20:56:43 by sgalasso         ###   ########.fr       */
+/*   Updated: 2018/08/01 01:54:54 by sgalasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ char	*parser_get_param(char *line, t_line *new, int nbp)
 	|| (param[0] != 'r' && parser_is_digits(param + 1)))
 	{
 		new->params[nbp] = param;
-		line += i;
-		return (line);
+		return (line + i);
 	}
+	free(param);
 	return (0);
 }
 
