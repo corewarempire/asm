@@ -72,7 +72,7 @@ char	*parser_multiple_labels(char **line, t_data *data, int fd)
 {
 	int		ret;
 	char	*temp;
-	
+
 	ret = 0;
 	temp = *line;
 	if (!(*line = parser_handle_label(*line, data)))
@@ -109,6 +109,8 @@ char	*parser_check_syntax(char *line, t_data *data, int fd)
 	if (!(new = parser_lstnew()))
 		return (0);
 	if (!(temp = parser_multiple_labels(&line, data, fd)))
+		return (0);
+	if (!(line = parser_cut_line(line)))
 		return (0);
 	if (!parser_is_empty(line) && !parser_inst_sample(line, data, new, nbp))
 		return (0);

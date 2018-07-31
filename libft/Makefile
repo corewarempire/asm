@@ -29,7 +29,7 @@ SOURCES = 	ft_lstdelone.c ft_strnequ.c ft_strclr.c ft_strdel.c ft_strncmp.c \
 			ft_printf_type_chars.c ft_printf_type_base.c ft_printf_type_others.c \
 			ft_atoi_long.c ft_isnumber.c ft_strtablen.c
 BINARIES =	$(SOURCES:.c=.o)
-CC		 = 	gcc -Wall -Werror -Wextra
+CC		 = 	gcc -Wall -Werror -Wextra -g # a ENLEVER !!!!!!!!!!!!!!!!!!
 
 all: $(NAME)
 

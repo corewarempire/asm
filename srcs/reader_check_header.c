@@ -127,6 +127,5 @@ int		reader_check_header(t_data *data, char *line, int fd)
 		if (ft_handle_comment(line, data, fd))
 			return (1);
 	}
-	ft_printf("Header error: line %d, (%s)\n", data->line_nb, line);
 	return (0);
 }
