@@ -65,4 +65,5 @@ void	parser_lstaddend(t_line *new, t_data *data)
 		new->next = 0;
 		data->lines = start;
 	}
+	labels_set_line(data->labels, new);
 }

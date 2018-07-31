@@ -95,6 +95,7 @@ int		lines_evaluate_size(t_line *line, t_op op);
 int		lines_review(t_data *data);
 
 void	labels_free(t_label *labels);
+void	labels_set_line(t_label *labels, t_line *line);
 int		labels_add(t_data *data, char *name);
 int		labels_find(t_data *data, int line_nb, char *to_find);
 char	*labels_modify_parameter(int shift, t_line *line, int destination);

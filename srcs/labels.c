@@ -36,12 +36,12 @@ int		labels_add(t_data *data, char *name)
 	return (1);
 }
 
-void	labels_set_line(t_label *label, t_line *line)
+void	labels_set_line(t_label *labels, t_line *line)
 {
-	while (label && !label->destination)
+	while (labels && !labels->destination)
 	{
-		label->destination = line;
-		label = label->next;
+		labels->destination = line;
+		labels = labels->next;
 	}
 }
 
