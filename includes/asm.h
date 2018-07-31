@@ -6,7 +6,7 @@
 /*   By: akarasso <akarasso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/19 19:40:53 by sgalasso          #+#    #+#             */
-/*   Updated: 2018/07/31 22:06:24 by sgalasso         ###   ########.fr       */
+/*   Updated: 2018/08/01 00:08:47 by sgalasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,9 @@ int		ft_partof(char c, char *str);
 char	*parser_check_syntax(char *line, t_data *data);
 t_line	*parser_lstnew();
 void	parser_lstaddend(t_line *new, t_data *data);
-int		parser_is_empty(char *line);
+int		reader_is_empty(char *line);
+int		ft_is_name(char *line);
+int		ft_is_comment(char *line);
 int		parser_is_label(char *str);
 char	*parser_handle_label(char *line, t_data *data);
 int		ft_partof(char c, char *str);

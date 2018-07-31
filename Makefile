@@ -6,7 +6,7 @@
 #    By: sgalasso <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/13 17:12:19 by sgalasso          #+#    #+#              #
-#    Updated: 2018/07/29 23:19:13 by sgalasso         ###   ########.fr        #
+#    Updated: 2018/08/01 00:03:09 by sgalasso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@ NAME = group-asm
 SRC = 	srcs/main.c \
 		srcs/reader.c \
 		srcs/data.c \
+		srcs/reader_is.c \
 		srcs/reader_check_header.c \
 		srcs/parser_check_syntax.c \
 		srcs/error.c \
