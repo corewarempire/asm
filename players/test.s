@@ -4,7 +4,6 @@
 
 .comment " Proie"
 
-start:				#46464
 start2:ld %0,r15
 
 bonjour:

@@ -97,6 +97,3 @@ strike:
 		fork	%180
 		ld		%0,		r16
 		zjmp	%:strike
-
-	
-

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_lst.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgalasso <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: akarasso <akarasso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/28 23:46:12 by sgalasso          #+#    #+#             */
-/*   Updated: 2018/07/31 02:50:59 by sgalasso         ###   ########.fr       */
+/*   Updated: 2018/07/31 22:45:06 by akarasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ void	parser_lstaddend(t_line *new, t_data *data)
 	t_line *start;
 
 	start = data->lines;
+	if (parser_handle_if_null(new))
+		return ;
 	if (data->lines == 0)
 	{
 		data->lines = new;
@@ -57,8 +59,6 @@ void	parser_lstaddend(t_line *new, t_data *data)
 	}
 	else
 	{
-		if (parser_handle_if_null(new))
-			return ;
 		while (data->lines->next)
 			data->lines = data->lines->next;
 		data->lines->next = new;

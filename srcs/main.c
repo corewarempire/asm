@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgalasso <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: akarasso <akarasso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/25 19:06:19 by sgalasso          #+#    #+#             */
-/*   Updated: 2018/07/29 22:25:50 by sgalasso         ###   ########.fr       */
+/*   Updated: 2018/07/31 22:44:46 by akarasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ int		main(int ac, char **av)
 		ft_printf("error in file opening\n");
 		return (2);
 	}
-	if (!reader_read(fd, &data) || !lines_review(&data)
+	if (!reader_read(fd, &data)
+		|| !lines_review(&data)
 		|| !labels_replace(&data))
 		error_exit(&data);
 	close(fd);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: meyami <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: akarasso <akarasso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/26 20:38:19 by meyami            #+#    #+#             */
-/*   Updated: 2018/07/31 21:56:39 by sgalasso         ###   ########.fr       */
+/*   Updated: 2018/07/31 22:46:34 by akarasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,8 @@ char	*file_create_name(char *path)
 	char	*file_name;
 
 	len = (int) (ft_strrchr(path, '.') - path);
-	if (!(name = ft_strsub(path, 0, len)))
-		return (0);
-	else if (!(file_name = ft_strjoin(name, ".cor")))
-	{
-		free(name);
-		return (0);
-	}
+	name = ft_strsub(path, 0, len);
+	file_name = ft_strjoin(name, ".cor");
 	return (file_name);
 }
 
