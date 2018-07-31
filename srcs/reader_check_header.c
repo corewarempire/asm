@@ -6,7 +6,7 @@
 /*   By: sgalasso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/19 21:53:25 by sgalasso          #+#    #+#             */
-/*   Updated: 2018/07/31 20:00:29 by sgalasso         ###   ########.fr       */
+/*   Updated: 2018/07/31 20:07:27 by sgalasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ int		ft_handle_comment(char *line, t_data *data, int fd)
 	{
 		if (!(data->comment = ft_strsub(line, start, ft_strlen(line) - (start + 1))))
 			return (0);
+		if (ft_strlen(data->comment) > COMMENT_LENGTH)
+			return (0);
 		return (1);
 	}
 	if (line[i] != '"')
@@ -82,6 +84,8 @@ int		ft_handle_comment(char *line, t_data *data, int fd)
 				if (line[i] == '"')
 				{
 					if (!(data->comment = ft_strjoin(data->comment, ft_strsub(line, 0, ft_strlen(line) - 1))))
+						return (0);
+					if (ft_strlen(data->comment) > COMMENT_LENGTH)
 						return (0);
 					return (1);
 				}
