@@ -48,8 +48,8 @@ struct	s_line
 	int		index;
 	int		line_nb;
 	int		command;
-	int		nb_params;
 	char	**params;
+	int		nb_params;
 	char	params_type[4];
 	char	params_code_byte;
 	t_line	*next;

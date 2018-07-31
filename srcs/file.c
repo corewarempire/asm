@@ -18,9 +18,7 @@ char	*file_create_name(char *path)
 	char	*name;
 	char	*file_name;
 
-	len = 0;
-	while (path[len] != '.')
-	len++;
+	len = (int) (ft_strrchr(path, '.') - path);
 	name = ft_strsub(path, 0, len);
 	file_name = ft_strjoin(name, ".cor");
 	free(name);

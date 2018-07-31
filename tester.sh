@@ -1,4 +1,4 @@
-echo "------------------ clear everything ------------------------"
+echo "                clear everything\n"
 
 rm files1/*.cor > /dev/null 2>&1
 rm files2/*.cor > /dev/null 2>&1

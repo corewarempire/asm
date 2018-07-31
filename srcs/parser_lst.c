@@ -25,6 +25,8 @@ t_line	*parser_lstnew(void)
 	new->index = 0;
 	new->command = 0;
 	new->nb_params = 0;
+	bzero(new->params_type, 4);
+	new->params_code_byte = 0;
 	if (!(new->params = (char **)(malloc(sizeof(char *) * (4)))))
 		return (0);
 	while (i < 4)

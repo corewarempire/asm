@@ -11,8 +11,6 @@
 /* ************************************************************************** */
 
 #include "../includes/asm.h"
-#include "../includes/op.h"
-#include "../libft/includes/libft.h"
 
 char	*parser_get_param(char *line, t_line *new, int nbp)
 {

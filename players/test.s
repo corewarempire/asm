@@ -22,7 +22,3 @@ label3:
 
 label2:
 label:
-
-
-
-

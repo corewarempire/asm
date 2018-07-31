@@ -52,6 +52,7 @@ int		labels_find(t_data *data, int line_nb, char *to_find)
 	label = data->labels;
 	while (label)
 	{
+		// printf("label %s destination line nb %d\n", label->name, label->destination->line_nb);
 		if (ft_strequ(label->name, to_find))
 			return (label->destination ? label->destination->index : data->prog_size);
 		label = label->next;
@@ -65,6 +66,7 @@ char	*labels_modify_parameter(int direct, t_line *line, int destination)
 	char *s;
 	char *s_dir;
 
+	// printf("destination to go %d\n", destination);
 	s = ft_itoa((destination - line->index) % MEM_SIZE);
 	if (direct)
 	{
@@ -95,6 +97,7 @@ int		labels_replace(t_data *data)
 											line->params[i] + 1 + direct)) == -1)
 					return (0);
 				free(line->params[i]);
+				// printf("label %s has target %d\n", line->params[i] + 1 + direct, target);
 				line->params[i] = labels_modify_parameter(direct, line, target);
 			}
 		}
