@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_check_syntax.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgalasso <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: akarasso <akarasso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/21 19:24:04 by sgalasso          #+#    #+#             */
-/*   Updated: 2018/07/31 19:04:19 by sgalasso         ###   ########.fr       */
+/*   Updated: 2018/07/31 19:42:27 by sgalasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,32 @@ int		parser_inst_sample(char *line, t_data *data, t_line *new, int nbp)
 	return (1);
 }
 
+char	*parser_multiple_labels(char **line, t_data *data, int fd)
+{
+	int		ret;
+	char	*temp;
+	
+	ret = 0;
+	temp = *line;
+	if (!(*line = parser_handle_label(*line, data)))
+		return (0);
+	while (parser_is_empty(*line))
+	{
+		while (parser_is_empty(*line))
+		{
+			//free(temp);
+			if ((ret = get_next_line(fd, line) == 0))
+				return (*line);
+			else if (ret < 0)
+				return (0);
+		}
+		temp = *line;
+		if (!(*line = parser_handle_label(*line, data)))
+			return (0);
+	}
+	return (temp);
+}
+
 char	*parser_check_syntax(char *line, t_data *data, int fd)
 {
 	char	*temp;
@@ -77,25 +103,15 @@ char	*parser_check_syntax(char *line, t_data *data, int fd)
 	nbp = 0;
 	temp = line;
 	if (!(line = parser_cut_line(line)))
-	{printf("out1\n");
 		return (0);
-	}
 	if (parser_is_empty(line))
-	{printf("out2\n");
 		return (temp);
-	}
 	if (!(new = parser_lstnew()))
-	{printf("out3\n");
 		return (0);
-	}
-	if (!(temp = parser_handle_label(&line, data, fd, new)))
-	{printf("out4\n");
+	if (!(temp = parser_multiple_labels(&line, data, fd)))
 		return (0);
-	}
 	if (!parser_is_empty(line) && !parser_inst_sample(line, data, new, nbp))
-	{printf("out5\n");
 		return (0);
-	}
 	parser_lstaddend(new, data);
 	return (temp);
 }

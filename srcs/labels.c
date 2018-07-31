@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   labels.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: meyami <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: akarasso <akarasso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/26 20:38:23 by meyami            #+#    #+#             */
-/*   Updated: 2018/07/30 22:14:34 by sgalasso         ###   ########.fr       */
+/*   Updated: 2018/07/31 19:08:59 by akarasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,29 +20,29 @@ void	labels_free(t_label *labels)
 	free(labels);
 }
 
-int		labels_add(t_data *data, t_line *line, char *name)
+int		labels_add(t_data *data, char *name)
 {
 	t_label *new;
-	t_label *ptr;
 
 	if (!(new = ft_memalloc(sizeof(t_label))))
 	{
-		ft_printf("Error in saving the line %d label\n", line->line_nb);
+		write(1, "Error in saving the label:malloc failed\n", 40);
 		return (0);
 	}
 	new->name = name;
-	new->destination = line;
-	new->next = 0;
-	if (!data->labels)
-		data->labels = new;
-	else
-	{
-		ptr = data->labels;
-		while (ptr->next)
-			ptr = ptr->next;
-		ptr->next = new;
-	}
+	new->destination = 0;
+	new->next = (data->labels) ? data->labels : 0;
+	data->labels = new;
 	return (1);
+}
+
+void	labels_set_line(t_label *label, t_line *line)
+{
+	while (label && !label->destination)
+	{
+		label->destination = line;
+		label = label->next;
+	}
 }
 
 int		labels_find(t_data *data, int line_nb, char *to_find)
