@@ -1,13 +1,28 @@
-.name "TEST"
-.comment "ceci est un test"
+#bonojur
+	.name		"TEST"
+#bonjour
+.comment "
+ceci est un test
+bonjour
+bonjour"
 
 start:
-		ld		%0,		r15
-		zjmp		%:label
-		zjmp		%:start
-		ld		%5,		r5
+start2:ld%0,r15
+zjmp		%:start
+		zjmp		%:start 
 		ld	%5,		r5
-		ld	%5,		r5
-		ld		%4,		r4
+		ld	%5,	r5
+		ld	%5,						r5
+		ld	%4,r4
+		st 	r1,6
 
+label3:
+
+
+
+label2:
 label:
+
+
+
+

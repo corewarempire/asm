@@ -6,7 +6,7 @@
 /*   By: sgalasso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/28 23:50:48 by sgalasso          #+#    #+#             */
-/*   Updated: 2018/07/30 23:40:44 by sgalasso         ###   ########.fr       */
+/*   Updated: 2018/07/31 18:39:18 by sgalasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int		parser_is_label(char *str)
 	int i;
 
 	i = 0;
+	while (str[i] && (str[i] == ' ' || str[i] == '\t'))
+		i++;
 	while (str[i])
 	{
 		if (!ft_partof(str[i], LABEL_CHARS))
@@ -28,7 +30,7 @@ int		parser_is_label(char *str)
 	return (1);
 }
 
-char	*parser_handle_label(char *line, t_line *new, t_data *data)
+char	*parser_get_label(char *line, t_line *new, t_data *data)
 {
 	int i;
 	int temp;
@@ -54,4 +56,30 @@ char	*parser_handle_label(char *line, t_line *new, t_data *data)
 	if (line[i] == 0)
 		return (0);
 	return (line);
+}
+
+char	*parser_handle_label(char **line, t_data *data, int fd, t_line *new)
+{
+	int		ret;
+
+	if (parser_is_label(*line))
+	{
+		while ((ret = get_next_line(fd, line)) > 0)
+		{
+			if (parser_is_label(*line))
+			{
+				if (!(*line = parser_get_label(*line, new, data)))
+					return (0);
+				if (!parser_is_empty(*line))
+					break ;
+			}
+			else if (ret == 0)
+			{
+				//if (!labels_add(data, 0, ft_strsub(*line, , ))) // fin unique label
+				//	return (0);
+				return (*line);
+			}
+		}
+	}
+	return (*line);
 }
