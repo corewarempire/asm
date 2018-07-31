@@ -63,8 +63,10 @@ int		ft_handle_comment(char *line, t_data *data, int fd)
 		i++;
 	if (line[i] == 0)
 	{
-		if (!(data->comment = ft_strdup("\n")))
-			return (0);
+		if (!(data->comment)) {
+			data->comment = ft_strdup(line + start);
+			data->comment = ft_strjoin(data->comment, "\n");
+		}
 	}
 	else
 	{

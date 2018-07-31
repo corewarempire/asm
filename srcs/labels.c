@@ -36,15 +36,6 @@ int		labels_add(t_data *data, char *name)
 	return (1);
 }
 
-void	labels_set_line(t_label *labels, t_line *line)
-{
-	while (labels && !labels->destination)
-	{
-		labels->destination = line;
-		labels = labels->next;
-	}
-}
-
 int		labels_find(t_data *data, int line_nb, char *to_find)
 {
 	t_label *label;

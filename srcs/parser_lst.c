@@ -27,6 +27,7 @@ t_line	*parser_lstnew(void)
 	new->nb_params = 0;
 	bzero(new->params_type, 4);
 	new->params_code_byte = 0;
+	new->next = 0;
 	if (!(new->params = (char **)(malloc(sizeof(char *) * (4)))))
 		return (0);
 	while (i < 4)
@@ -47,7 +48,8 @@ int		parser_handle_if_null(t_line *new)
 
 void	parser_lstaddend(t_line *new, t_data *data)
 {
-	t_line *start;
+	t_line	*start;
+	t_label	*ptr;
 
 	start = data->lines;
 	if (parser_handle_if_null(new))
@@ -65,5 +67,10 @@ void	parser_lstaddend(t_line *new, t_data *data)
 		new->next = 0;
 		data->lines = start;
 	}
-	labels_set_line(data->labels, new);
+	ptr = data->labels;
+	while (ptr && !ptr->destination)
+	{
+		ptr->destination = new;
+		ptr = ptr->next;
+	}
 }
