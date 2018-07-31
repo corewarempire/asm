@@ -6,7 +6,7 @@
 /*   By: sgalasso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/21 19:28:39 by sgalasso          #+#    #+#             */
-/*   Updated: 2018/07/31 18:04:54 by sgalasso         ###   ########.fr       */
+/*   Updated: 2018/07/31 19:06:17 by sgalasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ int		reader_read(int fd, t_data *data)
 	data->line_nb = 1;
 	if (!reader_header(data, fd, line))
 		return (0);
-	printf("ok to next\n");
+	printf("name    : %s\n", data->name);
+	printf("comment : %s\n", data->comment);
 	exit(EXIT_FAILURE);
 	if (!reader_parser(data, fd, line))
 		return (0);

@@ -6,7 +6,7 @@
 /*   By: sgalasso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/19 21:53:25 by sgalasso          #+#    #+#             */
-/*   Updated: 2018/07/31 18:38:03 by sgalasso         ###   ########.fr       */
+/*   Updated: 2018/07/31 19:11:09 by sgalasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,30 +61,34 @@ int		ft_handle_comment(char *line, t_data *data, int fd)
 	start = ++i;
 	while (line[i] && line[i] != '"')
 		i++;
-
-	//
-	if (!(data->comment = ft_strsub(line, start, ft_strlen(line) - (start + 1))))
-	{printf("oooooook\n");
+	if (line[i] != 0 && !(data->comment = ft_strsub(line, start, ft_strlen(line) - (start + 1))))
 		return (0);
-	}
-	//
-
 	if (line[i] != '"')
 	{
 		while (get_next_line(fd, &line) > 0)
 		{
 			i = 0;
-
 			while (line[i])
 			{
 				if (line[i] == '"')
 				{
-					if (!(data->comment = ft_strjoin(data->comment, line)))
+					if (data->comment == 0)
+					{
+						if (!(data->comment = ft_strdup(line)))
+							return (0);
+					}
+					else if (!(data->comment = ft_strjoin(data->comment, line)))
 						return (0);
 					return (1);
 				}
+				i++;
 			}
-			if (!(data->comment = ft_strjoin(data->comment, line)))
+			if (data->comment == 0)
+			{
+				if (!(data->comment = ft_strdup(line)))
+					return (0);
+			}
+			else if (!(data->comment = ft_strjoin(data->comment, line)))
 				return (0);
 		}
 	}

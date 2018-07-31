@@ -1,12 +1,15 @@
 #bonojur
 	.name		"TEST"
 #bonjour
+
 .comment "
 ceci est un test
 bonjour
-bonjour"
+	bonjour
 
-start:
+bonjour""
+
+start:				#46464
 start2:ld%0,r15
 zjmp		%:start
 		zjmp		%:start 
