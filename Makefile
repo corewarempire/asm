@@ -27,6 +27,7 @@ SRC = 	srcs/main.c \
 		srcs/parser_handle_label.c \
 		srcs/parser_handle_inst.c \
 		srcs/parser_handle_param.c \
+		srcs/dump.c \
 
 OBJ = $(SRC:.c=.o)
 

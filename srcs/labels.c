@@ -27,7 +27,7 @@ int		labels_add(t_data *data, char *name)
 
 	if (!(new = ft_memalloc(sizeof(t_label))))
 	{
-		write(1, "Error in saving the label:malloc failed\n", 40);
+		ft_putstr("Error in saving a label: malloc failed\n");
 		return (0);
 	}
 	new->name = name;

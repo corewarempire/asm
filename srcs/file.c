@@ -79,9 +79,7 @@ void	file_write_header(t_data *data, int fd)
 
 	file_write_number(COREWAR_EXEC_MAGIC, 0, 0, fd);
 	ft_putstr_fd(data->name, fd);
-	padding = (PROG_NAME_LENGTH + 1);
-	padding += 4 - padding % 4;
-	padding -= ft_strlen(data->name);
+	padding = NAME_SPACE - ft_strlen(data->name);
 	while (padding > 0)
 	{
 		ft_putchar_fd(0, fd);
@@ -89,9 +87,7 @@ void	file_write_header(t_data *data, int fd)
 	}
 	file_write_number(data->prog_size, 0, 0, fd);
 	ft_putstr_fd(data->comment, fd);
-	padding = (COMMENT_LENGTH + 1);
-	padding += 4 - padding % 4;
-	padding -= ft_strlen(data->comment);
+	padding = COMMENT_SPACE - ft_strlen(data->comment);
 	while (padding)
 	{
 		ft_putchar_fd(0, fd);
@@ -101,19 +97,15 @@ void	file_write_header(t_data *data, int fd)
 
 int		file_write(t_data *data, int fd, char *path)
 {
-	char	*file_name;
 	t_line	*line;
 
-	if (!(file_name = file_create_name(path))
-		|| (fd = open(file_name, O_WRONLY | O_CREAT, S_IRWXU | S_IRWXO)) == -1)
+	if (!(data->file_name = file_create_name(path))
+		|| (fd = open(data->file_name, O_WRONLY | O_CREAT, S_IRWXU | S_IRWXO)) == -1)
 	{
-		if (file_name)
-			free(file_name);
 		ft_printf("error in file writing\n");
 		return (0);
 	}
-	ft_printf("Writing output program to %s\n", file_name);
-	free(file_name);
+	ft_printf("Writing output program to %s\n", data->file_name);
 	file_write_header(data, fd);
 	line = data->lines;
 	while (line)

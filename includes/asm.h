@@ -24,6 +24,11 @@ typedef struct s_label			t_label;
 typedef struct s_data			t_data;
 typedef struct s_op				t_op;
 
+# define MAGIC_SPACE		4
+# define NAME_SPACE			(PROG_NAME_LENGTH + 1 + 4 - (PROG_NAME_LENGTH + 1) % 4)
+# define LENGTH_SPACE		4
+# define COMMENT_SPACE		(COMMENT_LENGTH + 1 + 4 - (COMMENT_LENGTH + 1) % 4)
+
 struct	s_op
 {
 	char			*name;
@@ -65,6 +70,8 @@ struct	s_data
 	unsigned		magic;
 	char			*name;
 	char			*comment;
+	char			*file_name;
+	char			flag;
 };
 
 void	error_exit(t_data *data);
@@ -97,7 +104,6 @@ int		lines_evaluate_size(t_line *line, t_op op);
 int		lines_review(t_data *data);
 
 void	labels_free(t_label *labels);
-void	labels_set_line(t_label *labels, t_line *line);
 int		labels_add(t_data *data, char *name);
 int		labels_find(t_data *data, int line_nb, char *to_find);
 char	*labels_modify_parameter(int shift, t_line *line, int destination);
@@ -113,5 +119,9 @@ void	file_write_parameters(t_data *data, t_line *line, int fd);
 void	file_write_header(t_data *data, int fd);
 char	*file_create_name(char *path);
 int		file_write(t_data *data, int fd, char *path);
+
+int		dump_flag_management(t_data *data, int ac, char **av);
+void	dump_separator(int counter);
+int		dump_dump(t_data *data, int fd);
 
 #endif
