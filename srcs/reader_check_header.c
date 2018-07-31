@@ -11,8 +11,6 @@
 /* ************************************************************************** */
 
 #include "../includes/asm.h"
-#include "../includes/op.h"
-#include "../libft/includes/libft.h"
 
 int		ft_handle_name(char *line, t_data *data)
 {

@@ -11,8 +11,6 @@
 /* ************************************************************************** */
 
 #include "../includes/asm.h"
-#include "../includes/op.h"
-#include "../libft/includes/libft.h"
 
 int		ft_partof(char c, char *str)
 {

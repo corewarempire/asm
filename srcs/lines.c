@@ -53,7 +53,7 @@ int		lines_evaluate_size(t_line *line, t_op op)
 				+ ((line->params_type[i] == T_DIR) * direct_size)
 				+ ((line->params_type[i] == T_IND) * IND_SIZE);
 	}
-	// printf("total size %d\n", size);
+	printf("total size %d\n", size);
 	return (size);
 }
 
@@ -71,7 +71,7 @@ int		lines_review(t_data *data)
 			return (0);
 		parameters__set_code_byte(line);
 		data->prog_size += lines_evaluate_size(line, op);
-		// printf("prog_size is now %d\n", data->prog_size);
+		printf("prog_size is now %d\n", data->prog_size);
 		line = line->next;
 	}
 	return (1);
