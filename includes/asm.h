@@ -6,7 +6,7 @@
 /*   By: akarasso <akarasso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/19 19:40:53 by sgalasso          #+#    #+#             */
-/*   Updated: 2018/07/31 20:06:58 by sgalasso         ###   ########.fr       */
+/*   Updated: 2018/07/31 22:01:12 by sgalasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int		reader_check_header(t_data *data, char *line, int fd);
 int		parser_is_digits(char *str);
 int		parser_is_label(char *str);
 int		ft_partof(char c, char *str);
-char	*parser_check_syntax(char *line, t_data *data, int fd);
+char	*parser_check_syntax(char *line, t_data *data);
 t_line	*parser_lstnew();
 void	parser_lstaddend(t_line *new, t_data *data);
 int		parser_is_empty(char *line);

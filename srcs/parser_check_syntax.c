@@ -6,7 +6,7 @@
 /*   By: akarasso <akarasso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/21 19:24:04 by sgalasso          #+#    #+#             */
-/*   Updated: 2018/07/31 19:42:27 by sgalasso         ###   ########.fr       */
+/*   Updated: 2018/07/31 22:01:14 by sgalasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,33 +68,7 @@ int		parser_inst_sample(char *line, t_data *data, t_line *new, int nbp)
 	return (1);
 }
 
-char	*parser_multiple_labels(char **line, t_data *data, int fd)
-{
-	int		ret;
-	char	*temp;
-
-	ret = 0;
-	temp = *line;
-	if (!(*line = parser_handle_label(*line, data)))
-		return (0);
-	while (parser_is_empty(*line))
-	{
-		while (parser_is_empty(*line))
-		{
-			//free(temp);
-			if ((ret = get_next_line(fd, line) == 0))
-				return (*line);
-			else if (ret < 0)
-				return (0);
-		}
-		temp = *line;
-		if (!(*line = parser_handle_label(*line, data)))
-			return (0);
-	}
-	return (temp);
-}
-
-char	*parser_check_syntax(char *line, t_data *data, int fd)
+char	*parser_check_syntax(char *line, t_data *data)
 {
 	char	*temp;
 	t_line	*new;
@@ -108,7 +82,7 @@ char	*parser_check_syntax(char *line, t_data *data, int fd)
 		return (temp);
 	if (!(new = parser_lstnew()))
 		return (0);
-	if (!(temp = parser_multiple_labels(&line, data, fd)))
+	if (!(line = parser_handle_label(line, data)))
 		return (0);
 	if (!(line = parser_cut_line(line)))
 		return (0);
