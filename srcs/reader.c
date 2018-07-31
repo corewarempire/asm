@@ -6,7 +6,7 @@
 /*   By: akarasso <akarasso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/21 19:28:39 by sgalasso          #+#    #+#             */
-/*   Updated: 2018/08/01 00:01:53 by sgalasso         ###   ########.fr       */
+/*   Updated: 2018/08/01 00:39:45 by sgalasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int		reader_parser(t_data *data, int fd, char *line)
 			return (0);
 		}
 		data->line_nb++;
+		ft_strdel(&line);
 	}
 	return (1);
 }
