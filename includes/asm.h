@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgalasso <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: akarasso <akarasso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/19 19:40:53 by sgalasso          #+#    #+#             */
-/*   Updated: 2018/07/30 23:11:24 by sgalasso         ###   ########.fr       */
+/*   Updated: 2018/07/31 19:03:20 by akarasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ char	*parser_check_syntax(char *line, t_data *data, int fd);
 t_line	*parser_lstnew();
 void	parser_lstaddend(t_line *new, t_data *data);
 int		parser_is_label(char *str);
-char	*parser_handle_label(char *line, t_line *new, t_data *data);
+char	*parser_handle_label(char *line, t_data *data);
 int		ft_partof(char c, char *str);
 int		parser_is_inst(char *inst, t_op *op_tab, t_line *new);
 char	*parser_handle_inst(char *line, t_op *op_tab, t_line *new);
@@ -94,7 +94,7 @@ int		lines_evaluate_size(t_line *line, t_op op);
 int		lines_review(t_data *data);
 
 void	labels_free(t_label *labels);
-int		labels_add(t_data *data, t_line *line, char *name);
+int		labels_add(t_data *data, char *name);
 int		labels_find(t_data *data, int line_nb, char *to_find);
 char	*labels_modify_parameter(int shift, t_line *line, int destination);
 int		labels_replace(t_data *data);
