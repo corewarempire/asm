@@ -6,7 +6,7 @@
 /*   By: meyami <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/26 20:38:44 by meyami            #+#    #+#             */
-/*   Updated: 2018/07/26 20:38:46 by meyami           ###   ########.fr       */
+/*   Updated: 2018/07/31 19:42:39 by sgalasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,12 @@ void	parameters__set_code_byte(t_line *line)
 	line->params_code_byte += parameters_encode(line->params_type[0], 6)
 							+ parameters_encode(line->params_type[1], 4)
 							+ parameters_encode(line->params_type[2], 2);
+	// ft_printf("command %d\nparameter 1: %s\nparameter 2: %s\nparameter 3: %s\ncode byte: %hhb / %hhx\n",
+	// 		line->command,
+	// 		line->params[0],
+	// 		line->params[1] ? line->params[1] : "",
+	// 		line->params[2] ? line->params[2] : "",
+	// 		line->params_code_byte,
+	// 		line->params_code_byte);
+	ft_putchar('\n');
 }

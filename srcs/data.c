@@ -6,7 +6,7 @@
 /*   By: meyami <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/26 20:38:02 by meyami            #+#    #+#             */
-/*   Updated: 2018/07/29 02:22:00 by sgalasso         ###   ########.fr       */
+/*   Updated: 2018/08/01 00:45:07 by sgalasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	data_initialize(t_data *data)
 	data->labels = 0;
 	data->prog_size = 0;
 	data->op_tab = g_op_tab;
+	data->flag = 0;
 }
 
 void	data_free(t_data *data)
@@ -56,4 +57,5 @@ void	data_free(t_data *data)
 	labels_free(data->labels);
 	free(data->name);
 	free(data->comment);
+	free(data->file_name);
 }

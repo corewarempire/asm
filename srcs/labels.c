@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   labels.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: meyami <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: akarasso <akarasso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/26 20:38:23 by meyami            #+#    #+#             */
-/*   Updated: 2018/07/26 20:38:26 by meyami           ###   ########.fr       */
+/*   Updated: 2018/08/01 00:46:14 by sgalasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,31 +17,23 @@ void	labels_free(t_label *labels)
 	if (!labels)
 		return ;
 	labels_free(labels->next);
+	free(labels->name);
 	free(labels);
 }
 
-int		labels_add(t_data *data, t_line *line)
+int		labels_add(t_data *data, char *name)
 {
 	t_label *new;
-	t_label *ptr;
 
 	if (!(new = ft_memalloc(sizeof(t_label))))
 	{
-		ft_printf("Error in saving the line %d label\n", line->line_nb);
+		ft_putstr("Error in saving a label: malloc failed\n");
 		return (0);
 	}
-	new->name = line->label;
-	new->destination = line;
-	new->next = 0;
-	if (!data->labels)
-		data->labels = new;
-	else
-	{
-		ptr = data->labels;
-		while (ptr->next)
-			ptr = ptr->next;
-		ptr->next = new;
-	}
+	new->name = name;
+	new->destination = 0;
+	new->next = (data->labels) ? data->labels : 0;
+	data->labels = new;
 	return (1);
 }
 
@@ -52,8 +44,9 @@ int		labels_find(t_data *data, int line_nb, char *to_find)
 	label = data->labels;
 	while (label)
 	{
+		// printf("label %s destination line nb %d\n", label->name, label->destination->line_nb);
 		if (ft_strequ(label->name, to_find))
-			return (label->destination->index);
+			return (label->destination ? label->destination->index : data->prog_size);
 		label = label->next;
 	}
 	ft_printf("Error: label not found in line %d\n", line_nb);
@@ -65,9 +58,8 @@ char	*labels_modify_parameter(int direct, t_line *line, int destination)
 	char *s;
 	char *s_dir;
 
-	s = ft_itoa(destination < line->index
-			? MEM_SIZE - (line->index - destination)
-			: destination - line->index);
+	// printf("destination to go %d\n", destination);
+	s = ft_itoa((destination - line->index) % MEM_SIZE);
 	if (direct)
 	{
 		s_dir = ft_strjoin("%", s);
@@ -97,6 +89,7 @@ int		labels_replace(t_data *data)
 											line->params[i] + 1 + direct)) == -1)
 					return (0);
 				free(line->params[i]);
+				// printf("label %s has target %d\n", line->params[i] + 1 + direct, target);
 				line->params[i] = labels_modify_parameter(direct, line, target);
 			}
 		}

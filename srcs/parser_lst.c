@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_lst.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgalasso <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: akarasso <akarasso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/28 23:46:12 by sgalasso          #+#    #+#             */
-/*   Updated: 2018/07/29 01:31:26 by sgalasso         ###   ########.fr       */
+/*   Updated: 2018/07/31 22:45:06 by akarasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,11 @@ t_line	*parser_lstnew(void)
 	if (!(new = (t_line *)(malloc(sizeof(t_line)))))
 		return (0);
 	new->index = 0;
-	new->label = 0;
 	new->command = 0;
 	new->nb_params = 0;
+	bzero(new->params_type, 4);
+	new->params_code_byte = 0;
+	new->next = 0;
 	if (!(new->params = (char **)(malloc(sizeof(char *) * (4)))))
 		return (0);
 	while (i < 4)
@@ -33,11 +35,25 @@ t_line	*parser_lstnew(void)
 	return (new);
 }
 
+int		parser_handle_if_null(t_line *new)
+{
+	if (new->command == 0)
+	{
+		lines_free(new);
+		return (1);
+	}
+	else
+		return (0);
+}
+
 void	parser_lstaddend(t_line *new, t_data *data)
 {
-	t_line *start;
+	t_line	*start;
+	t_label	*ptr;
 
 	start = data->lines;
+	if (parser_handle_if_null(new))
+		return ;
 	if (data->lines == 0)
 	{
 		data->lines = new;
@@ -50,5 +66,11 @@ void	parser_lstaddend(t_line *new, t_data *data)
 		data->lines->next = new;
 		new->next = 0;
 		data->lines = start;
+	}
+	ptr = data->labels;
+	while (ptr && !ptr->destination)
+	{
+		ptr->destination = new;
+		ptr = ptr->next;
 	}
 }

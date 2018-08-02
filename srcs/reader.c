@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   reader.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgalasso <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: akarasso <akarasso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/21 19:28:39 by sgalasso          #+#    #+#             */
-/*   Updated: 2018/07/29 23:19:09 by sgalasso         ###   ########.fr       */
+/*   Updated: 2018/08/01 01:17:58 by sgalasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,14 @@ int		reader_header(t_data *data, int fd, char *line)
 {
 	while (!(data->name && data->comment))
 	{
-		if (get_next_line(fd, &line) <= 0 || !reader_check_header(data, line))
+		if (get_next_line(fd, &line) <= 0
+			|| !reader_check_header(data, line, fd))
 		{
 			ft_printf("Header error: line %d, (%s)\n", data->line_nb, line);
-			free(line);
+			ft_strdel(&line);
 			return (0);
 		}
-		free(line);
+		ft_strdel(&line);
 		data->line_nb++;
 	}
 	return (1);
@@ -32,15 +33,16 @@ int		reader_parser(t_data *data, int fd, char *line)
 {
 	while (get_next_line(fd, &line) > 0)
 	{
-		if (!parser_check_syntax(line, data, fd))
+		if (!(line = parser_check_syntax(line, data)))
 		{
 			ft_printf("Syntax error: line %d, (%s)\n", data->line_nb, line);
-			free(line);
+			ft_strdel(&line);
 			return (0);
 		}
 		data->line_nb++;
-		free(line);
+		ft_strdel(&line);
 	}
+	ft_strdel(&line);
 	return (1);
 }
 

@@ -10,3 +10,9 @@
 * protection malloc
 
 * label et instruction sur des lignes differentes
+
+* ASM :
+*
+* commentaires sur plusieurs lignes
+* Unicodes sur commentaires
+* le truc chiant sur les labels

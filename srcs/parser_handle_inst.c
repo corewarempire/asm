@@ -6,13 +6,11 @@
 /*   By: sgalasso <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/28 23:53:01 by sgalasso          #+#    #+#             */
-/*   Updated: 2018/07/29 01:22:14 by sgalasso         ###   ########.fr       */
+/*   Updated: 2018/07/31 22:26:46 by sgalasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/asm.h"
-#include "../includes/op.h"
-#include "../libft/includes/libft.h"
 
 int		ft_partof(char c, char *str)
 {

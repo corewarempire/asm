@@ -1,4 +1,4 @@
-echo "------------------ clear everything ------------------------"
+echo "                clear everything\n"
 
 rm files1/*.cor > /dev/null 2>&1
 rm files2/*.cor > /dev/null 2>&1
@@ -18,7 +18,7 @@ do
 	then
 		echo "${GREEN}files are both written${NC}"
 		result=$(diff files1/$trimmed.cor files2/$trimmed.cor | rev | cut -d' ' -f1 | rev)
-		if [ $result = "differ" ]
+		if [[ $result = "differ" ]]
 		then
 			echo "${RED}But files not equal...${NC}"
 		else

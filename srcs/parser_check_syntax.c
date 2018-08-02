@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_check_syntax.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgalasso <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: akarasso <akarasso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/21 19:24:04 by sgalasso          #+#    #+#             */
-/*   Updated: 2018/07/29 03:09:53 by sgalasso         ###   ########.fr       */
+/*   Updated: 2018/08/01 01:34:47 by sgalasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int		parser_inst_sample(char *line, t_data *data, t_line *new, int nbp)
 	return (1);
 }
 
-char	*parser_check_syntax(char *line, t_data *data, int fd)
+char	*parser_check_syntax(char *line, t_data *data)
 {
 	char	*temp;
 	t_line	*new;
@@ -81,20 +81,17 @@ char	*parser_check_syntax(char *line, t_data *data, int fd)
 	if (parser_is_empty(line))
 		return (temp);
 	if (!(new = parser_lstnew()))
-		return (0);
-	if (!(line = parser_handle_label(line, new)))
-		return (0);
-	if (parser_is_empty(line))
 	{
-		//free(line); // LEAK ?
-		if (get_next_line(fd, &line) <= 0)
-			return (0);
-		temp = line;
+		ft_strdel(&temp);
+		return (0);
 	}
-	if (!parser_is_empty(line))
+	if (!(line = parser_handle_label(line, data))
+		|| !(line = parser_cut_line(line))
+		|| (!parser_is_empty(line) && !parser_inst_sample(line, data, new, nbp)))
 	{
-		if (!parser_inst_sample(line, data, new, nbp))
-			return (0);
+		lines_free(new);
+		ft_strdel(&temp);
+		return (0);
 	}
 	parser_lstaddend(new, data);
 	return (temp);

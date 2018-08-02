@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   parser_handle_label.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgalasso <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: akarasso <akarasso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/28 23:50:48 by sgalasso          #+#    #+#             */
-/*   Updated: 2018/07/29 02:44:41 by sgalasso         ###   ########.fr       */
+/*   Updated: 2018/08/01 00:44:19 by sgalasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/asm.h"
-#include "../includes/op.h"
-#include "../libft/includes/libft.h"
 
 int		parser_is_label(char *str)
 {
 	int i;
 
 	i = 0;
+	while (str[i] && (str[i] == ' ' || str[i] == '\t'))
+		i++;
 	while (str[i])
 	{
 		if (!ft_partof(str[i], LABEL_CHARS))
@@ -28,7 +28,7 @@ int		parser_is_label(char *str)
 	return (1);
 }
 
-char	*parser_handle_label(char *line, t_line *new)
+char	*parser_handle_label(char *line, t_data *data)
 {
 	int i;
 	int temp;
@@ -46,7 +46,8 @@ char	*parser_handle_label(char *line, t_line *new)
 	}
 	if (line[i] == ':')
 	{
-		new->label = ft_strsub(line, temp, i - temp);
+		if (!labels_add(data, ft_strsub(line, temp, i - temp)))
+			return (0);
 		line += i + 1;
 		return (line);
 	}

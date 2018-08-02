@@ -39,7 +39,8 @@ debut:		live %42			#5
 		zjmp %:init			#3
 		#fork %:debut			
 		live %3
-level0:		#fork %:level10
+llllll:
+level0:
 level11:	live %4
 		#fork %:level111
 
